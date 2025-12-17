@@ -119,7 +119,7 @@
         /* --- TYPOGRAPHY --- */
         h1 {
             font-size: 3.2rem;
-            margin: 0 0 0.5rem 0;
+            margin: 0 0 1.5rem 0; /* Increased bottom margin since subtitle is gone */
             background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -181,17 +181,22 @@
             filter: grayscale(0.8);
         }
         
-        /* Secondary Button Style for "Other Games" */
+        /* Centered Button Style (for Other Games, Back, Understood) */
+        .btn.centered {
+            justify-content: center;
+            text-align: center;
+        }
+        .btn.centered .btn-content {
+            text-align: center;
+            flex: 0 0 auto;
+        }
+        
         .btn.secondary {
             border: 2px solid var(--primary-color);
             background: transparent;
             color: var(--primary-color);
-            justify-content: center;
         }
-        .btn.secondary .btn-content {
-            text-align: center;
-            flex: 0 0 auto;
-        }
+        .btn.secondary .icon-svg { fill: var(--primary-color); }
 
         .btn-content { text-align: left; flex: 1; }
         .btn-title { font-size: 1.2rem; }
@@ -217,7 +222,6 @@
         }
         .btn.highlight .icon-svg { fill: var(--primary-color); }
         .btn.locked .icon-svg { opacity: 0.7; }
-        .btn.secondary .icon-svg { fill: var(--primary-color); }
 
         /* --- SETTINGS TOGGLE --- */
         .toggle-row {
@@ -395,13 +399,15 @@
             border: 2px solid var(--floor-color);
         }
         
+        /* Responsive Demo Walls */
         .demo-wall { position: absolute; background: var(--wall-color); border-radius: 4px; transition: background-color 0.3s;}
         
+        /* Target on the right side using percentages */
         .demo-target {
             position: absolute; width: 34px; height: 34px;
             background: rgba(79, 209, 197, 0.3);
             border-radius: 10px; 
-            right: 50px; top: 43px;
+            right: 15%; top: 43px; /* Responsive positioning */
             display: flex; justify-content: center; align-items: center;
         }
         .demo-target-inner { width: 14px; height: 14px; background: var(--primary-color); border-radius: 50%; }
@@ -411,20 +417,21 @@
             background: var(--primary-color); border-radius: 10px;
             box-shadow: 0 4px 10px rgba(79, 209, 197, 0.4);
             display: flex; justify-content: center; align-items: center; gap: 4px;
+            /* Animation applied here */
             animation: demoAnim 3s infinite ease-out;
         }
         .demo-eye { width: 5px; height: 5px; background: white; border-radius: 50%; }
 
         @keyframes demoAnim {
-            0% { left: 40px; top: 45px; transform: scale(1); opacity: 1; }
-            10% { left: 40px; top: 45px; }
-            /* Slide Right Fast */
-            40% { left: 240px; top: 45px; } 
+            0% { left: 10%; top: 45px; transform: scale(1); opacity: 1; }
+            10% { left: 10%; top: 45px; }
+            /* Slide Right to ~ 85% - playerWidth */
+            40% { left: 78%; top: 45px; } 
             /* Hit Wall & Stop */
-            70% { left: 240px; top: 45px; transform: scale(1); opacity: 1; }
+            70% { left: 78%; top: 45px; transform: scale(1); opacity: 1; }
             /* Fade out/Reset */
-            85% { left: 240px; top: 45px; transform: scale(1.2); opacity: 0; }
-            100% { left: 40px; top: 45px; transform: scale(1); opacity: 0; }
+            85% { left: 78%; top: 45px; transform: scale(1.2); opacity: 0; }
+            100% { left: 10%; top: 45px; transform: scale(1); opacity: 0; }
         }
 
     </style>
@@ -449,16 +456,16 @@
     <div id="screen-menu" class="screen active">
         <div style="flex:1"></div>
         <h1>Zen Glider</h1>
-        <p>Путь к гармонии через логику</p>
+        <!-- Removed Subtitle "Путь к гармонии через логику" -->
         
-        <div class="menu-scroll" style="height: 350px;">
+        <div class="menu-scroll" style="height: 380px;">
             <button class="btn" id="btn-mode-0" onclick="Game.startMode(0)">
                 <div class="btn-content">
                     <div class="btn-title">Новичок (5x5)</div>
                     <div class="btn-sub" id="sub-0">Уровень 1</div>
                 </div>
                 <div class="btn-icon">
-                     <svg viewBox="0 0 24 24" class="icon-svg"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path></svg>
+                     <!-- Icons will be injected by JS -->
                 </div>
             </button>
 
@@ -467,9 +474,7 @@
                     <div class="btn-title">Любитель (6x6)</div>
                     <div class="btn-sub" id="sub-1">Закрыто</div>
                 </div>
-                <div class="btn-icon">
-                    <svg viewBox="0 0 24 24" class="icon-svg"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"></path></svg>
-                </div>
+                <div class="btn-icon"></div>
             </button>
 
             <button class="btn" id="btn-mode-2" onclick="Game.startMode(2)">
@@ -477,9 +482,7 @@
                     <div class="btn-title">Мастер (8x8)</div>
                     <div class="btn-sub" id="sub-2">Закрыто</div>
                 </div>
-                <div class="btn-icon">
-                    <svg viewBox="0 0 24 24" class="icon-svg"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"></path></svg>
-                </div>
+                <div class="btn-icon"></div>
             </button>
             
             <button class="btn" id="btn-mode-3" onclick="Game.startMode(3)">
@@ -487,9 +490,7 @@
                     <div class="btn-title">Эксперт (10x10)</div>
                     <div class="btn-sub" id="sub-3">Закрыто</div>
                 </div>
-                <div class="btn-icon">
-                    <svg viewBox="0 0 24 24" class="icon-svg"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"></path></svg>
-                </div>
+                <div class="btn-icon"></div>
             </button>
             
             <button class="btn" id="btn-mode-4" onclick="Game.startMode(4)">
@@ -497,13 +498,11 @@
                     <div class="btn-title">Гуру (12x12)</div>
                     <div class="btn-sub" id="sub-4">Закрыто</div>
                 </div>
-                <div class="btn-icon">
-                    <svg viewBox="0 0 24 24" class="icon-svg"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"></path></svg>
-                </div>
+                <div class="btn-icon"></div>
             </button>
 
-            <!-- Other Games Button -->
-            <button class="btn secondary" onclick="Game.showOtherGames()">
+            <!-- Other Games Button Centered -->
+            <button class="btn secondary centered" onclick="Game.showOtherGames()">
                 <div class="btn-content">Другие игры</div>
             </button>
         </div>
@@ -528,7 +527,8 @@
                     <!-- JS will populate this -->
                 </div>
             </div>
-            <button class="btn highlight" onclick="Game.showMenu()" style="width: 100%; margin: 20px 0 0 0;">Назад</button>
+            <!-- Back Button Centered -->
+            <button class="btn highlight centered" onclick="Game.showMenu()" style="width: 100%; margin: 20px 0 0 0;">Назад</button>
         </div>
     </div>
 
@@ -551,7 +551,7 @@
                 </div>
             </div>
 
-            <button class="btn highlight" onclick="Game.showMenu()" style="width: 100%; margin: 20px 0 0 0;">Готово</button>
+            <button class="btn highlight centered" onclick="Game.showMenu()" style="width: 100%; margin: 20px 0 0 0;">Готово</button>
         </div>
     </div>
 
@@ -562,8 +562,10 @@
             <div class="rules-demo">
                 <div class="demo-wall" style="top: 0; left: 0; width: 100%; height: 10px;"></div>
                 <div class="demo-wall" style="bottom: 0; left: 0; width: 100%; height: 10px;"></div>
-                <div class="demo-wall" style="top: 0; left: 280px; width: 10px; height: 100%;"></div>
-                <div class="demo-target" style="left: 240px; top: 43px;">
+                <!-- Vertical wall responsive -->
+                <div class="demo-wall" style="top: 0; right: 10%; width: 10px; height: 100%;"></div>
+                
+                <div class="demo-target">
                     <div class="demo-target-inner"></div>
                 </div>
                 <div class="demo-player">
@@ -576,7 +578,8 @@
                 2. Остановка только у стен.<br>
                 3. Цель: зеленая зона.<br>
             </p>
-            <button class="btn highlight" onclick="Game.showMenu()" style="width: 100%; margin: 0;">Понятно</button>
+            <!-- Button Centered -->
+            <button class="btn highlight centered" onclick="Game.showMenu()" style="width: 100%; margin: 0;">Понятно</button>
         </div>
     </div>
 
@@ -584,8 +587,8 @@
     <div id="screen-pause" class="screen">
         <div class="modal-card">
             <h2>Пауза</h2>
-            <button class="btn highlight" onclick="Game.resumeGame()" style="width: 100%; margin: 10px 0;">Продолжить</button>
-            <button class="btn" onclick="Game.quitToMenu()" style="width: 100%; margin: 10px 0;">В меню</button>
+            <button class="btn highlight centered" onclick="Game.resumeGame()" style="width: 100%; margin: 10px 0;">Продолжить</button>
+            <button class="btn centered" onclick="Game.quitToMenu()" style="width: 100%; margin: 10px 0;">В меню</button>
         </div>
     </div>
 
@@ -604,8 +607,8 @@
                     <div class="stat-label">Побед</div>
                 </div>
             </div>
-            <button class="btn highlight" onclick="Game.finishLevelAndNext()" style="width: 100%; margin: 10px 0;">Дальше</button>
-            <button class="btn" onclick="Game.quitToMenu()" style="width: 100%; margin: 10px 0;">В меню</button>
+            <button class="btn highlight centered" onclick="Game.finishLevelAndNext()" style="width: 100%; margin: 10px 0;">Дальше</button>
+            <button class="btn centered" onclick="Game.quitToMenu()" style="width: 100%; margin: 10px 0;">В меню</button>
         </div>
     </div>
 
@@ -615,8 +618,8 @@
             <span style="font-size: 3rem;">🔓</span>
             <h2>Новый уровень!</h2>
             <p>Ты настоящий мастер. Следующая сложность открыта.</p>
-            <button class="btn highlight" onclick="Game.switchToNextMode()" style="width: 100%; margin: 10px 0;">Перейти</button>
-            <button class="btn" onclick="Game.stayOnCurrentMode()" style="width: 100%; margin: 10px 0;">Остаться</button>
+            <button class="btn highlight centered" onclick="Game.switchToNextMode()" style="width: 100%; margin: 10px 0;">Перейти</button>
+            <button class="btn centered" onclick="Game.stayOnCurrentMode()" style="width: 100%; margin: 10px 0;">Остаться</button>
         </div>
     </div>
 
@@ -678,13 +681,16 @@ class LevelGenerator {
     }
 
     generate() {
-        for (let i = 0; i < 150; i++) {
+        // Increased attempts to find a hard level
+        for (let i = 0; i < 500; i++) {
             const level = this.createRandomLayout();
             const solution = this.solve(level);
             
-            let minPath = 3;
-            if (this.width > 6) minPath = 5;
-            if (this.width > 8) minPath = 7;
+            // Harder minimum constraints
+            let minPath = 5; // Base hard difficulty
+            if (this.width >= 6) minPath = 6;
+            if (this.width >= 8) minPath = 8;
+            if (this.width >= 10) minPath = 10;
 
             if (solution && solution.length >= minPath) {
                 level.minMoves = solution.length;
@@ -763,7 +769,7 @@ class LevelGenerator {
             walls: [{x:1, y:1}, {x:3, y:3}],
             start: {x:0, y:0},
             end: {x:4, y:4},
-            minMoves: 2
+            minMoves: 3 
         };
     }
 }
@@ -1345,20 +1351,28 @@ class ZenGlider {
     }
 
     updateMenuUI() {
+        const icons = {
+            arrow: `<svg viewBox="0 0 24 24" class="icon-svg"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path></svg>`,
+            lock: `<svg viewBox="0 0 24 24" class="icon-svg"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"></path></svg>`
+        };
+
         for(let i=0; i<5; i++) {
             const wins = this.state.wins[i];
             const isUnlocked = this.state.unlocks[i];
             const btn = document.getElementById(`btn-mode-${i}`);
             const subEl = document.getElementById(`sub-${i}`);
+            const iconEl = btn ? btn.querySelector('.btn-icon') : null;
 
-            if (btn) {
+            if (btn && iconEl) {
                 btn.classList.remove('locked', 'highlight');
                 if (isUnlocked) {
                     if (subEl) subEl.innerText = `Уровень ${wins + 1}`;
+                    iconEl.innerHTML = icons.arrow;
                 } else {
                     let prevWins = this.state.wins[i-1];
                     if (subEl) subEl.innerText = `Прогресс: ${prevWins}/${this.winsToUnlock}`;
                     btn.classList.add('locked');
+                    iconEl.innerHTML = icons.lock;
                 }
             }
         }

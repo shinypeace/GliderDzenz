@@ -17,7 +17,7 @@
             --primary-dark: #38b2ac;
             --wall-color: #a0aec0;
             --floor-color: #e2e8f0;
-            --glass-bg: rgba(255, 255, 255, 0.95);
+            --glass-bg: rgba(255, 255, 255, 0.92);
             --shadow-light: #ffffff;
             --shadow-dark: #d1d9e6;
             --modal-bg: white;
@@ -25,14 +25,14 @@
         }
 
         body.dark-mode {
-            /* Dark Theme - High Contrast */
+            /* Dark Theme */
             --bg-color: #1a202c;
             --text-color: #f7fafc;
             --primary-color: #4fd1c5;
             --primary-dark: #81e6d9;
-            --wall-color: #718096; 
-            --floor-color: #111319; 
-            --glass-bg: rgba(26, 32, 44, 0.98);
+            --wall-color: #718096;
+            --floor-color: #111319;
+            --glass-bg: rgba(26, 32, 44, 0.95);
             --shadow-light: #2d3748;
             --shadow-dark: #000000;
             --modal-bg: #2d3748;
@@ -117,14 +117,13 @@
 
         /* --- TYPOGRAPHY --- */
         h1 {
-            font-size: 3rem;
-            margin: 0 0 10px 0;
+            font-size: 3.2rem;
+            margin: 0 0 1rem 0;
             background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.1));
             letter-spacing: -1px;
-            line-height: 1.1;
             text-align: center;
         }
         
@@ -135,41 +134,41 @@
         }
 
         p {
-            font-size: 1.05rem;
-            line-height: 1.5;
+            font-size: 1.1rem;
+            line-height: 1.6;
             text-align: center;
             color: var(--text-color);
-            opacity: 0.9;
-            margin-bottom: 20px;
+            opacity: 0.8;
+            margin-bottom: 25px;
         }
 
-        /* --- BUTTONS (COMPACT) --- */
+        /* --- BUTTONS --- */
         .btn {
             background: var(--bg-color);
             border: none;
-            padding: 12px 20px; /* Reduced padding */
+            /* Balanced padding: tall enough to touch, short enough to fit */
+            padding: 16px 24px; 
             font-size: 1.1rem;
             font-weight: 700;
             color: var(--btn-text);
-            border-radius: 18px;
-            margin: 6px 0; /* Tighter margins */
+            border-radius: 20px;
+            margin: 8px auto; /* Tighter margins */
             cursor: pointer;
-            box-shadow:  5px 5px 10px var(--shadow-dark),
-                        -5px -5px 10px var(--shadow-light);
+            box-shadow:  6px 6px 12px var(--shadow-dark),
+                        -6px -6px 12px var(--shadow-light);
             transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.3s;
-            width: 100%;
-            max-width: 340px;
+            width: 90%;
+            max-width: 320px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: relative;
-            overflow: hidden;
-            min-height: 60px; /* Compact height */
+            overflow: visible;
         }
 
         .btn:active {
-            box-shadow: inset 2px 2px 5px var(--shadow-dark),
-                        inset -2px -2px 5px var(--shadow-light);
+            box-shadow: inset 3px 3px 6px var(--shadow-dark),
+                        inset -3px -3px 6px var(--shadow-light);
             transform: translateY(1px);
         }
 
@@ -179,61 +178,46 @@
         }
         
         .btn.locked {
-            opacity: 0.6;
-            filter: grayscale(0.8);
+            opacity: 0.5;
+            filter: grayscale(1);
         }
         
-        .btn.centered {
-            justify-content: center;
-            text-align: center;
-        }
-        .btn.centered .btn-content {
-            text-align: center;
-            flex: 0 0 auto;
-        }
-        
+        /* Secondary / Centered Button */
         .btn.secondary {
             border: 2px solid var(--primary-color);
             background: transparent;
             color: var(--primary-color);
-            min-height: 50px;
-            margin-top: 10px;
+            justify-content: center;
+            text-align: center;
         }
         .btn.secondary .icon-svg { fill: var(--primary-color); }
+        .btn.secondary .btn-content { text-align: center; flex: 0 0 auto; }
+
+        .btn.centered {
+            justify-content: center;
+            text-align: center;
+        }
+        .btn.centered .btn-content { flex: 0 0 auto; }
 
         .btn-content { text-align: left; flex: 1; }
-        .btn-title { font-size: 1.15rem; line-height: 1.2; }
-        .btn-sub { font-size: 0.85rem; opacity: 0.7; margin-top: 2px; font-weight: 500; }
+        .btn-title { font-size: 1.15rem; }
+        .btn-sub { font-size: 0.85rem; opacity: 0.6; margin-top: 2px; font-weight: 500; }
 
-        .btn-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            justify-content: center;
-            align-items: center;
-            padding: 0;
-            margin-left: 10px;
-            display: flex;
-        }
-        
         .btn-small-icon {
-            width: 50px;
-            height: 50px;
+            width: 55px;
+            height: 55px;
+            min-width: 55px;
             border-radius: 50%;
             justify-content: center;
             align-items: center;
             padding: 0;
-            margin: 0 8px;
+            margin: 0 10px;
+            font-size: 1.5rem;
             display: flex;
-            background: var(--bg-color);
-            box-shadow:  5px 5px 10px var(--shadow-dark),
-                        -5px -5px 10px var(--shadow-light);
-        }
-        .btn-small-icon:active {
-            box-shadow: inset 2px 2px 5px var(--shadow-dark),
-                        inset -2px -2px 5px var(--shadow-light);
+            flex-direction: row; 
         }
         
+        /* Icons */
         .icon-svg {
             width: 24px;
             height: 24px;
@@ -314,8 +298,8 @@
         /* --- MODALS --- */
         .modal-card {
             background: var(--modal-bg);
-            padding: 30px;
-            border-radius: 30px;
+            padding: 35px;
+            border-radius: 35px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.15);
             text-align: center;
             width: 90%;
@@ -327,44 +311,34 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 15px;
-            margin: 20px 0;
+            margin: 25px 0;
         }
 
         .stat-box {
             background: var(--bg-color);
-            padding: 12px;
-            border-radius: 16px;
+            padding: 15px;
+            border-radius: 20px;
             transition: background-color 0.3s;
         }
 
         .stat-val { font-size: 1.4rem; font-weight: 900; color: var(--text-color); }
         .stat-label { font-size: 0.7rem; opacity: 0.6; text-transform: uppercase; letter-spacing: 1px; margin-top: 5px; }
 
-        /* --- MENU LAYOUT --- */
-        .menu-container {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            max-width: 360px;
-            padding: 0 10px;
-            flex: 1;
-            justify-content: center; /* Center content vertically */
-            min-height: 0; /* Allow shrinking */
-        }
-
+        /* --- MENU SCROLL --- */
         .menu-scroll {
             width: 100%;
+            /* Allow flexible height but constrained by container */
+            flex: 1; 
             overflow-y: auto;
             display: flex;
             flex-direction: column;
             align-items: center;
-            /* Scrollbar hidden */
+            padding: 5px 0;
             scrollbar-width: none;
-            -ms-overflow-style: none;
-            /* Fade effect for scroll */
             mask-image: linear-gradient(to bottom, transparent, black 10px, black 90%, transparent);
             -webkit-mask-image: linear-gradient(to bottom, transparent, black 10px, black 90%, transparent);
-            padding: 10px 0;
+            /* Min height to ensure scrollability on small screens if needed */
+            min-height: 0;
         }
         .menu-scroll::-webkit-scrollbar { display: none; }
         
@@ -372,9 +346,9 @@
         .games-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
+            gap: 15px;
             width: 100%;
-            padding: 5px 0;
+            padding: 10px 0;
         }
         .game-item {
             display: flex;
@@ -385,11 +359,11 @@
         }
         .game-item:active { transform: scale(0.95); }
         .game-icon-box {
-            width: 64px;
-            height: 64px;
+            width: 70px;
+            height: 70px;
             background: var(--floor-color);
-            border-radius: 16px;
-            margin-bottom: 6px;
+            border-radius: 18px;
+            margin-bottom: 8px;
             overflow: hidden;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             display: flex;
@@ -398,66 +372,60 @@
         }
         .game-icon-img { width: 100%; height: 100%; object-fit: cover; }
         .game-title {
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             font-weight: 700;
             text-align: center;
-            line-height: 1.1;
+            line-height: 1.2;
             color: var(--text-color);
         }
 
-        /* --- PERFECT RULES ANIMATION --- */
+        /* --- RULES ANIMATION (FIXED) --- */
         .rules-demo {
-            width: 100%;
+            width: 280px;
             height: 100px;
             background: var(--bg-color);
             border-radius: 16px;
             position: relative;
-            margin-bottom: 20px;
+            margin: 0 auto 25px auto;
             overflow: hidden;
             border: 2px solid var(--floor-color);
         }
         
-        /* Absolute positioning with percentages for perfect scale */
-        .demo-wall { position: absolute; background: var(--wall-color); border-radius: 3px; z-index: 1;}
+        .demo-wall { position: absolute; background: var(--wall-color); border-radius: 2px; }
+        
+        /* Full Box */
         .w-top { top: 0; left: 0; width: 100%; height: 6px; }
         .w-bot { bottom: 0; left: 0; width: 100%; height: 6px; }
+        .w-left { top: 0; left: 0; width: 6px; height: 100%; }
         .w-right { top: 0; right: 0; width: 6px; height: 100%; }
         
         .demo-target {
-            position: absolute;
-            right: 15%; /* Always 15% from right */
-            top: 50%;
-            transform: translateY(-50%);
-            width: 32px; height: 32px;
+            position: absolute; width: 30px; height: 30px;
             background: rgba(79, 209, 197, 0.3);
-            border-radius: 8px;
+            border-radius: 8px; 
+            right: 6px;
+            top: 35px;
             display: flex; justify-content: center; align-items: center;
-            z-index: 2;
         }
         .demo-target-inner { width: 12px; height: 12px; background: var(--primary-color); border-radius: 50%; }
         
         .demo-player {
-            position: absolute;
-            top: 50%;
-            /* Left will be animated */
-            transform: translateY(-50%);
-            width: 28px; height: 28px;
-            background: var(--primary-color);
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(79, 209, 197, 0.4);
+            position: absolute; width: 26px; height: 26px;
+            background: var(--primary-color); border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(79, 209, 197, 0.4);
             display: flex; justify-content: center; align-items: center; gap: 4px;
-            z-index: 3;
-            animation: perfectSlide 3s infinite ease-in-out;
+            top: 37px;
+            animation: exactSlide 3s infinite ease-in-out;
         }
         .demo-eye { width: 4px; height: 4px; background: white; border-radius: 50%; }
 
-        @keyframes perfectSlide {
-            0% { left: 10%; opacity: 0; transform: translateY(-50%) scale(0.8); }
-            15% { left: 10%; opacity: 1; transform: translateY(-50%) scale(1); }
-            45% { left: 70%; } /* Stops visually just before target/wall area */
-            70% { left: 70%; opacity: 1; transform: translateY(-50%) scale(1); }
-            85% { left: 70%; opacity: 0; transform: translateY(-50%) scale(1.2); }
-            100% { left: 10%; opacity: 0; transform: translateY(-50%) scale(0.8); }
+        @keyframes exactSlide {
+            0% { left: 8px; opacity: 0; transform: scale(0.8); }
+            15% { left: 8px; opacity: 1; transform: scale(1); }
+            45% { left: 244px; }
+            70% { left: 244px; opacity: 1; transform: scale(1); }
+            85% { left: 244px; opacity: 0; transform: scale(1.2); }
+            100% { left: 8px; opacity: 0; transform: scale(0.8); }
         }
 
     </style>
@@ -480,71 +448,71 @@
 
     <!-- MAIN MENU -->
     <div id="screen-menu" class="screen active">
+        <div style="flex:1"></div>
         <h1>Глайдикс</h1>
         
-        <div class="menu-container">
-            <div class="menu-scroll">
-                <button class="btn" id="btn-mode-0" onclick="Game.startMode(0)">
-                    <div class="btn-content">
-                        <div class="btn-title">Новичок (5x5)</div>
-                        <div class="btn-sub" id="sub-0">Уровень 1</div>
-                    </div>
-                    <div class="btn-icon"></div>
-                </button>
+        <div class="menu-scroll" style="height: 350px;">
+            <button class="btn" id="btn-mode-0" onclick="Game.startMode(0)">
+                <div class="btn-content">
+                    <div class="btn-title">Новичок (5x5)</div>
+                    <div class="btn-sub" id="sub-0">Уровень 1</div>
+                </div>
+                <div class="btn-icon"></div>
+            </button>
 
-                <button class="btn" id="btn-mode-1" onclick="Game.startMode(1)">
-                    <div class="btn-content">
-                        <div class="btn-title">Любитель (6x6)</div>
-                        <div class="btn-sub" id="sub-1">Закрыто</div>
-                    </div>
-                    <div class="btn-icon"></div>
-                </button>
+            <button class="btn" id="btn-mode-1" onclick="Game.startMode(1)">
+                <div class="btn-content">
+                    <div class="btn-title">Любитель (6x6)</div>
+                    <div class="btn-sub" id="sub-1">Закрыто</div>
+                </div>
+                <div class="btn-icon"></div>
+            </button>
 
-                <button class="btn" id="btn-mode-2" onclick="Game.startMode(2)">
-                    <div class="btn-content">
-                        <div class="btn-title">Мастер (8x8)</div>
-                        <div class="btn-sub" id="sub-2">Закрыто</div>
-                    </div>
-                    <div class="btn-icon"></div>
-                </button>
-                
-                <button class="btn" id="btn-mode-3" onclick="Game.startMode(3)">
-                    <div class="btn-content">
-                        <div class="btn-title">Эксперт (10x10)</div>
-                        <div class="btn-sub" id="sub-3">Закрыто</div>
-                    </div>
-                    <div class="btn-icon"></div>
-                </button>
-                
-                <button class="btn" id="btn-mode-4" onclick="Game.startMode(4)">
-                    <div class="btn-content">
-                        <div class="btn-title">Гуру (12x12)</div>
-                        <div class="btn-sub" id="sub-4">Закрыто</div>
-                    </div>
-                    <div class="btn-icon"></div>
-                </button>
+            <button class="btn" id="btn-mode-2" onclick="Game.startMode(2)">
+                <div class="btn-content">
+                    <div class="btn-title">Мастер (8x8)</div>
+                    <div class="btn-sub" id="sub-2">Закрыто</div>
+                </div>
+                <div class="btn-icon"></div>
+            </button>
+            
+            <button class="btn" id="btn-mode-3" onclick="Game.startMode(3)">
+                <div class="btn-content">
+                    <div class="btn-title">Эксперт (10x10)</div>
+                    <div class="btn-sub" id="sub-3">Закрыто</div>
+                </div>
+                <div class="btn-icon"></div>
+            </button>
+            
+            <button class="btn" id="btn-mode-4" onclick="Game.startMode(4)">
+                <div class="btn-content">
+                    <div class="btn-title">Гуру (12x12)</div>
+                    <div class="btn-sub" id="sub-4">Закрыто</div>
+                </div>
+                <div class="btn-icon"></div>
+            </button>
 
-                <button class="btn secondary centered" onclick="Game.showOtherGames()">
-                    <div class="btn-content">Другие игры</div>
-                </button>
-            </div>
+            <button class="btn secondary centered" onclick="Game.showOtherGames()">
+                <div class="btn-content">Другие игры</div>
+            </button>
         </div>
         
-        <div style="display: flex; justify-content: center; width: 100%; margin-top: 10px; margin-bottom: 20px;">
+        <div style="display: flex; justify-content: center; width: 100%; margin-top: 10px;">
             <button class="btn btn-small-icon" onclick="Game.showSettings()">
-                <svg viewBox="0 0 24 24" class="icon-svg" style="width:24px;height:24px;"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L3.16 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"></path></svg>
+                <svg viewBox="0 0 24 24" class="icon-svg" style="width:28px;height:28px;"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L3.16 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"></path></svg>
             </button>
             <button class="btn btn-small-icon" onclick="Game.showRules()">
                 <span style="font-size: 1.5rem; font-weight: 900;">?</span>
             </button>
         </div>
+        <div style="flex:1"></div>
     </div>
 
     <!-- OTHER GAMES SCREEN -->
     <div id="screen-other-games" class="screen">
         <div class="modal-card" style="width: 100%; max-width: 400px; padding: 25px;">
             <h2>Другие игры</h2>
-            <div class="menu-scroll" style="height: 320px;">
+            <div class="menu-scroll" style="height: 350px;">
                 <div class="games-grid" id="other-games-container"></div>
             </div>
             <button class="btn highlight centered" onclick="Game.showMenu()" style="width: 100%; margin: 20px 0 0 0;">Назад</button>
@@ -555,18 +523,21 @@
     <div id="screen-settings" class="screen">
         <div class="modal-card">
             <h2>Настройки</h2>
+            
             <div class="toggle-row" onclick="Game.toggleSound()">
                 <span class="btn-title">Звук</span>
                 <div class="toggle-switch" id="toggle-sound">
                     <div class="toggle-knob"></div>
                 </div>
             </div>
+
             <div class="toggle-row" onclick="Game.toggleTheme()">
                 <span class="btn-title">Темная тема</span>
                 <div class="toggle-switch" id="toggle-theme">
                     <div class="toggle-knob"></div>
                 </div>
             </div>
+
             <button class="btn highlight centered" onclick="Game.showMenu()" style="width: 100%; margin: 20px 0 0 0;">Готово</button>
         </div>
     </div>
@@ -578,6 +549,7 @@
             <div class="rules-demo">
                 <div class="demo-wall w-top"></div>
                 <div class="demo-wall w-bot"></div>
+                <div class="demo-wall w-left"></div>
                 <div class="demo-wall w-right"></div>
                 
                 <div class="demo-target">
@@ -588,7 +560,11 @@
                 </div>
             </div>
 
-            <p>1. Свайпай для движения.<br>2. Остановка только у стен.<br>3. Цель: зеленая зона.</p>
+            <p style="text-align: left; font-size: 0.95rem;">
+                1. Свайпай для движения.<br>
+                2. Остановка только у стен.<br>
+                3. Цель: зеленая зона.<br>
+            </p>
             <button class="btn highlight centered" onclick="Game.showMenu()" style="width: 100%; margin: 0;">Понятно</button>
         </div>
     </div>
@@ -683,9 +659,8 @@ class AudioManager {
         setTimeout(() => this.playTone(600, 'sine', 0.4), 450);
     }
     
-    // Taptic / Haptic Feedback
+    // Taptic
     vibrate(type) {
-        // 1. VK Bridge Taptic
         if (typeof vkBridge !== 'undefined' && vkBridge.send) {
             try {
                 if (type === 'light') vkBridge.send('VKWebAppTapticImpactOccurred', {style: 'light'});
@@ -695,7 +670,6 @@ class AudioManager {
                 return;
             } catch(e) {}
         }
-        // 2. Web API Fallback
         if (navigator.vibrate) {
             if (type === 'light') navigator.vibrate(10);
             else if (type === 'medium') navigator.vibrate(20);
@@ -806,12 +780,14 @@ class LevelGenerator {
 class ZenGlider {
     constructor() {
         this.canvas = document.getElementById('gameCanvas');
-        this.ctx = this.canvas.getContext('2d', { alpha: false }); 
+        this.ctx = this.canvas.getContext('2d', { alpha: false }); // Optimization
         this.audio = new AudioManager();
         
         this.winsToUnlock = 20;
         this.vkUserId = null;
         
+        this.levelsSinceAd = 0; // Ad counter
+
         this.state = {
             mode: 0,
             levelData: null,
@@ -838,8 +814,9 @@ class ZenGlider {
             targetDot: '#2f855a'
         };
         
+        // VK Initialization & Loading
         this.initVK().then(() => {
-             this.loadProgress(); 
+             this.loadProgress(); // Load after VK init (to get UserID)
              this.initAfterLoad();
         });
 
@@ -858,16 +835,23 @@ class ZenGlider {
         if (typeof vkBridge !== 'undefined') {
             try {
                 await vkBridge.send('VKWebAppInit');
+                // Banner Ad
                 vkBridge.send('VKWebAppShowBannerAd', { banner_location: 'bottom' }).catch(e => console.log('Ad error', e));
+                
+                // Check ads
+                vkBridge.send('VKWebAppCheckNativeAds', { ad_format: 'interstitial' });
+
+                // User Info
                 const user = await vkBridge.send('VKWebAppGetUserInfo');
                 this.vkUserId = user.id;
             } catch (error) {
-                console.warn("VK Bridge Init Error:", error);
+                console.warn("VK Bridge Init Error or User Info Error:", error);
             }
         }
     }
     
     initAfterLoad() {
+        // Theme init
         if (this.state.settings.dark) {
             document.body.classList.add('dark-mode');
             this.updateThemeColors();
@@ -885,6 +869,7 @@ class ZenGlider {
     }
 
     async loadProgress() {
+        // 1. Try VK Storage if User ID exists
         if (this.vkUserId) {
              const storageKey = `zenglider_data_${this.vkUserId}`;
              try {
@@ -896,6 +881,7 @@ class ZenGlider {
              } catch(e) { console.warn("VK Storage Load Failed", e); }
         }
 
+        // 2. Fallback to LocalStorage
         const saved = localStorage.getItem('zenGliderSave_v4');
         if (saved) {
             this.applyData(JSON.parse(saved));
@@ -910,6 +896,7 @@ class ZenGlider {
             this.audio.enabled = this.state.settings.sound;
         }
         this.checkUnlocks();
+        // Force update UI after data application since this might be async
         this.updateMenuUI(); 
         this.updateSettingsUI();
         if(this.state.settings.dark) {
@@ -927,12 +914,15 @@ class ZenGlider {
         };
         const dataStr = JSON.stringify(data);
         
+        // 1. VK Storage
         if (this.vkUserId) {
             const storageKey = `zenglider_data_${this.vkUserId}`;
             vkBridge.send('VKWebAppStorageSet', { key: storageKey, value: dataStr }).catch(e => console.warn(e));
         }
         
+        // 2. Local Storage (always as backup)
         localStorage.setItem('zenGliderSave_v4', dataStr);
+        
         this.updateMenuUI();
     }
 
@@ -955,7 +945,7 @@ class ZenGlider {
         this.audio.vibrate('light');
         this.saveProgress(false);
         this.updateSettingsUI();
-        this.draw(); 
+        this.draw(); // Redraw immediately
     }
 
     updateSettingsUI() {
@@ -1078,7 +1068,7 @@ class ZenGlider {
                 if (Math.abs(dy) > 30) this.move(0, dy > 0 ? 1 : -1);
             }
             this.isDragging = false;
-            startX = null; 
+            startX = null; // Reset
         };
 
         this.canvas.addEventListener('touchstart', e => handleStart(e.touches[0].clientX, e.touches[0].clientY), {passive: false});
@@ -1089,6 +1079,7 @@ class ZenGlider {
 
         this.canvas.addEventListener('mousedown', e => handleStart(e.clientX, e.clientY));
         
+        // Fixed: Check isDragging before processing mouseup globally
         window.addEventListener('mouseup', e => {
             if(this.isDragging) handleEnd(e.clientX, e.clientY);
         });
@@ -1103,13 +1094,14 @@ class ZenGlider {
 
         const pauseBtn = document.getElementById('btn-pause');
         pauseBtn.onclick = (e) => {
-            e.stopPropagation(); 
+            e.stopPropagation(); // Stop click from triggering game inputs
             if(this.state.status === 'playing') {
                 this.audio.vibrate('light');
                 this.state.status = 'pause';
                 document.getElementById('screen-pause').classList.add('active');
             }
         };
+        // Prevent touchstart propagation specifically
         pauseBtn.addEventListener('touchstart', (e) => e.stopPropagation());
 
         const resetBtn = document.getElementById('btn-reset');
@@ -1214,6 +1206,20 @@ class ZenGlider {
             this.audio.vibrate('success');
         }
 
+        // Ad Logic
+        this.levelsSinceAd++;
+        let adThreshold = 10; // Default for 0 & 1
+        if (this.state.mode === 2 || this.state.mode === 3) adThreshold = 6;
+        if (this.state.mode === 4) adThreshold = 4;
+
+        if (this.levelsSinceAd >= adThreshold) {
+            if (typeof vkBridge !== 'undefined') {
+                vkBridge.send('VKWebAppShowNativeAds', { ad_format: 'interstitial' })
+                    .catch(e => console.log('Ad error', e));
+            }
+            this.levelsSinceAd = 0;
+        }
+
         this.savedLevel = null; 
         this.saveProgress(false); 
 
@@ -1269,11 +1275,13 @@ class ZenGlider {
         const cs = this.cellSize;
         const pad = 3;
 
+        // Floor - Batched drawing to prevent partial renders/artifacts
         this.ctx.save();
         this.ctx.fillStyle = this.colors.floor;
-        this.ctx.beginPath(); 
+        this.ctx.beginPath(); // Start one path for ALL tiles
         for(let y=0; y<ld.height; y++) {
             for(let x=0; x<ld.width; x++) {
+                // Add to current path without clearing
                 this.addRoundedRectPath(
                     this.offsetX + x*cs + pad, 
                     this.offsetY + y*cs + pad, 
@@ -1281,9 +1289,10 @@ class ZenGlider {
                 );
             }
         }
-        this.ctx.fill(); 
+        this.ctx.fill(); // Fill once
         this.ctx.restore();
 
+        // Target
         this.ctx.save();
         this.ctx.fillStyle = this.colors.target;
         let tx = this.offsetX + ld.end.x*cs + pad;
@@ -1300,6 +1309,7 @@ class ZenGlider {
         this.ctx.fill();
         this.ctx.restore();
 
+        // Walls
         this.ctx.save();
         this.ctx.fillStyle = this.colors.wall;
         this.ctx.shadowColor = this.colors.wallShadow;
@@ -1315,6 +1325,7 @@ class ZenGlider {
         this.ctx.fill();
         this.ctx.restore();
 
+        // Player
         const p = this.state.player;
         this.ctx.save();
         this.ctx.fillStyle = this.colors.player;
@@ -1328,6 +1339,7 @@ class ZenGlider {
         this.ctx.fill();
         this.ctx.restore();
 
+        // Eyes
         this.ctx.fillStyle = 'white';
         let psize = cs - pad*2;
         this.ctx.beginPath();
@@ -1335,6 +1347,7 @@ class ZenGlider {
         this.ctx.arc(px + psize*0.7, py + psize*0.4, psize*0.1, 0, Math.PI*2);
         this.ctx.fill();
 
+        // Particles
         for(let part of this.particles) {
             this.ctx.globalAlpha = part.life;
             this.ctx.fillStyle = part.color;
@@ -1345,12 +1358,14 @@ class ZenGlider {
         this.ctx.globalAlpha = 1.0;
     }
 
+    // Helper for single draw
     drawRoundedRect(x, y, w, h, r) {
         this.ctx.beginPath();
         this.addRoundedRectPath(x, y, w, h, r);
         this.ctx.closePath();
     }
     
+    // Helper for adding to path (fixed logic error)
     addRoundedRectPath(x, y, w, h, r) {
         this.ctx.moveTo(x + r, y);
         this.ctx.lineTo(x + w - r, y);
@@ -1455,6 +1470,8 @@ class ZenGlider {
                 }
             };
             
+            // Note: Since I don't have the actual icon files, I'm using a placeholder logic 
+            // but keeping the 'src' pointing to what you asked for.
             item.innerHTML = `
                 <div class="game-icon-box">
                     <img src="${game.icon}" alt="${game.name}" class="game-icon-img" onerror="this.style.display='none';this.parentNode.style.backgroundColor='#cbd5e0'">

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Zen Glider</title>
+    <title>Глайдикс</title>
     <!-- VK Bridge -->
     <script src="https://unpkg.com/@vkontakte/vk-bridge/dist/browser.min.js"></script>
     <style>
@@ -17,7 +17,7 @@
             --primary-dark: #38b2ac;
             --wall-color: #a0aec0;
             --floor-color: #e2e8f0;
-            --glass-bg: rgba(255, 255, 255, 0.92);
+            --glass-bg: rgba(255, 255, 255, 0.95);
             --shadow-light: #ffffff;
             --shadow-dark: #d1d9e6;
             --modal-bg: white;
@@ -25,19 +25,14 @@
         }
 
         body.dark-mode {
-            /* Dark Theme - High Contrast Fix */
+            /* Dark Theme - High Contrast */
             --bg-color: #1a202c;
             --text-color: #f7fafc;
             --primary-color: #4fd1c5;
             --primary-dark: #81e6d9;
-            
-            /* Wall is now lighter gray to stand out against dark floor */
             --wall-color: #718096; 
-            
-            /* Floor is very dark, almost black */
             --floor-color: #111319; 
-            
-            --glass-bg: rgba(26, 32, 44, 0.95);
+            --glass-bg: rgba(26, 32, 44, 0.98);
             --shadow-light: #2d3748;
             --shadow-dark: #000000;
             --modal-bg: #2d3748;
@@ -85,7 +80,6 @@
             width: 100%;
             flex-grow: 1;
             z-index: 1;
-            /* Fix for sub-pixel rendering gaps */
             background-color: var(--bg-color); 
         }
 
@@ -123,15 +117,15 @@
 
         /* --- TYPOGRAPHY --- */
         h1 {
-            font-size: 3.2rem;
-            /* Minimal margins to free up space */
-            margin: 0.5rem 0 0.5rem 0; 
+            font-size: 3rem;
+            margin: 0 0 10px 0;
             background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.1));
             letter-spacing: -1px;
             line-height: 1.1;
+            text-align: center;
         }
         
         h2 {
@@ -141,49 +135,47 @@
         }
 
         p {
-            font-size: 1.1rem;
-            line-height: 1.6;
+            font-size: 1.05rem;
+            line-height: 1.5;
             text-align: center;
             color: var(--text-color);
-            opacity: 0.8;
-            margin-bottom: 25px;
+            opacity: 0.9;
+            margin-bottom: 20px;
         }
 
-        /* --- BUTTONS --- */
+        /* --- BUTTONS (COMPACT) --- */
         .btn {
             background: var(--bg-color);
             border: none;
-            /* Increased padding for bigger buttons */
-            padding: 22px 30px; 
-            font-size: 1.25rem;
+            padding: 12px 20px; /* Reduced padding */
+            font-size: 1.1rem;
             font-weight: 700;
             color: var(--btn-text);
-            border-radius: 24px;
-            margin: 8px 6px;
+            border-radius: 18px;
+            margin: 6px 0; /* Tighter margins */
             cursor: pointer;
-            box-shadow:  6px 6px 12px var(--shadow-dark),
-                        -6px -6px 12px var(--shadow-light);
+            box-shadow:  5px 5px 10px var(--shadow-dark),
+                        -5px -5px 10px var(--shadow-light);
             transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.3s;
-            width: 95%; /* Wider */
-            max-width: 360px;
+            width: 100%;
+            max-width: 340px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: relative;
             overflow: hidden;
-            min-height: 80px; /* Ensure visual bulk */
+            min-height: 60px; /* Compact height */
         }
 
         .btn:active {
-            box-shadow: inset 3px 3px 6px var(--shadow-dark),
-                        inset -3px -3px 6px var(--shadow-light);
+            box-shadow: inset 2px 2px 5px var(--shadow-dark),
+                        inset -2px -2px 5px var(--shadow-light);
             transform: translateY(1px);
         }
 
         .btn.highlight {
             border: 2px solid var(--primary-color);
             color: var(--primary-color);
-            min-height: 60px; /* Helper buttons can be smaller */
         }
         
         .btn.locked {
@@ -191,12 +183,9 @@
             filter: grayscale(0.8);
         }
         
-        /* Centered Button Style */
         .btn.centered {
             justify-content: center;
             text-align: center;
-            padding: 18px 25px;
-            min-height: 60px;
         }
         .btn.centered .btn-content {
             text-align: center;
@@ -207,30 +196,47 @@
             border: 2px solid var(--primary-color);
             background: transparent;
             color: var(--primary-color);
-            min-height: 60px;
+            min-height: 50px;
+            margin-top: 10px;
         }
         .btn.secondary .icon-svg { fill: var(--primary-color); }
 
         .btn-content { text-align: left; flex: 1; }
-        .btn-title { font-size: 1.3rem; } /* Slightly larger title */
-        .btn-sub { font-size: 0.95rem; opacity: 0.7; margin-top: 4px; font-weight: 500; }
+        .btn-title { font-size: 1.15rem; line-height: 1.2; }
+        .btn-sub { font-size: 0.85rem; opacity: 0.7; margin-top: 2px; font-weight: 500; }
 
-        .btn-small-icon {
-            width: 60px;
-            height: 60px;
+        .btn-icon {
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             justify-content: center;
             align-items: center;
             padding: 0;
-            margin: 0 10px;
+            margin-left: 10px;
             display: flex;
-            min-height: 0;
         }
         
-        /* SVG Icons */
+        .btn-small-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            margin: 0 8px;
+            display: flex;
+            background: var(--bg-color);
+            box-shadow:  5px 5px 10px var(--shadow-dark),
+                        -5px -5px 10px var(--shadow-light);
+        }
+        .btn-small-icon:active {
+            box-shadow: inset 2px 2px 5px var(--shadow-dark),
+                        inset -2px -2px 5px var(--shadow-light);
+        }
+        
         .icon-svg {
-            width: 28px;
-            height: 28px;
+            width: 24px;
+            height: 24px;
             fill: var(--btn-text);
             transition: fill 0.3s;
         }
@@ -257,10 +263,7 @@
             cursor: pointer;
             transition: background 0.3s;
         }
-        
-        .toggle-switch.on {
-            background: var(--primary-color);
-        }
+        .toggle-switch.on { background: var(--primary-color); }
         
         .toggle-knob {
             position: absolute;
@@ -273,10 +276,7 @@
             transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
             box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
-        
-        .toggle-switch.on .toggle-knob {
-            transform: translateX(22px);
-        }
+        .toggle-switch.on .toggle-knob { transform: translateX(22px); }
 
         /* --- HUD --- */
         #hud {
@@ -309,14 +309,13 @@
             align-items: center;
             justify-content: center;
         }
-        
         .hud-item:active { transform: scale(0.95); }
 
         /* --- MODALS --- */
         .modal-card {
             background: var(--modal-bg);
-            padding: 35px;
-            border-radius: 35px;
+            padding: 30px;
+            border-radius: 30px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.15);
             text-align: center;
             width: 90%;
@@ -328,31 +327,44 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 15px;
-            margin: 25px 0;
+            margin: 20px 0;
         }
 
         .stat-box {
             background: var(--bg-color);
-            padding: 15px;
-            border-radius: 20px;
+            padding: 12px;
+            border-radius: 16px;
             transition: background-color 0.3s;
         }
 
         .stat-val { font-size: 1.4rem; font-weight: 900; color: var(--text-color); }
         .stat-label { font-size: 0.7rem; opacity: 0.6; text-transform: uppercase; letter-spacing: 1px; margin-top: 5px; }
 
-        /* --- MENU SCROLL --- */
+        /* --- MENU LAYOUT --- */
+        .menu-container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 360px;
+            padding: 0 10px;
+            flex: 1;
+            justify-content: center; /* Center content vertically */
+            min-height: 0; /* Allow shrinking */
+        }
+
         .menu-scroll {
             width: 100%;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 5px 0;
+            /* Scrollbar hidden */
             scrollbar-width: none;
-            /* Expanded mask to see more buttons */
-            mask-image: linear-gradient(to bottom, transparent, black 5px, black 95%, transparent);
-            -webkit-mask-image: linear-gradient(to bottom, transparent, black 5px, black 95%, transparent);
+            -ms-overflow-style: none;
+            /* Fade effect for scroll */
+            mask-image: linear-gradient(to bottom, transparent, black 10px, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to bottom, transparent, black 10px, black 90%, transparent);
+            padding: 10px 0;
         }
         .menu-scroll::-webkit-scrollbar { display: none; }
         
@@ -360,9 +372,9 @@
         .games-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
+            gap: 12px;
             width: 100%;
-            padding: 10px 0;
+            padding: 5px 0;
         }
         .game-item {
             display: flex;
@@ -372,106 +384,80 @@
             transition: transform 0.2s;
         }
         .game-item:active { transform: scale(0.95); }
-        .game-item:hover .game-icon-box {
-            transform: scale(1.05);
-            box-shadow: 0 8px 12px rgba(0,0,0,0.15);
-        }
         .game-icon-box {
-            width: 70px;
-            height: 70px;
+            width: 64px;
+            height: 64px;
             background: var(--floor-color);
-            border-radius: 18px;
-            margin-bottom: 8px;
+            border-radius: 16px;
+            margin-bottom: 6px;
             overflow: hidden;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: all 0.2s;
             display: flex;
             justify-content: center;
             align-items: center;
         }
-        .game-icon-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+        .game-icon-img { width: 100%; height: 100%; object-fit: cover; }
         .game-title {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 700;
             text-align: center;
-            line-height: 1.2;
+            line-height: 1.1;
             color: var(--text-color);
         }
 
-        /* --- RULES ANIMATION (Fixed Layout) --- */
+        /* --- PERFECT RULES ANIMATION --- */
         .rules-demo {
             width: 100%;
-            height: 100px; /* Slightly shorter to save space */
+            height: 100px;
             background: var(--bg-color);
             border-radius: 16px;
             position: relative;
             margin-bottom: 20px;
             overflow: hidden;
             border: 2px solid var(--floor-color);
-            /* Ensure we use a flex layout or relative container for safe positioning */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .demo-container {
-            width: 90%; /* Safety margin */
-            height: 100%;
-            position: relative;
         }
         
-        /* Responsive Demo Walls */
-        .demo-wall { 
-            position: absolute; 
-            background: var(--wall-color); 
-            border-radius: 4px; 
-            transition: background-color 0.3s;
-        }
+        /* Absolute positioning with percentages for perfect scale */
+        .demo-wall { position: absolute; background: var(--wall-color); border-radius: 3px; z-index: 1;}
+        .w-top { top: 0; left: 0; width: 100%; height: 6px; }
+        .w-bot { bottom: 0; left: 0; width: 100%; height: 6px; }
+        .w-right { top: 0; right: 0; width: 6px; height: 100%; }
         
-        /* Horizontal Walls */
-        .w-top { top: 0; left: 0; width: 100%; height: 8px; }
-        .w-bot { bottom: 0; left: 0; width: 100%; height: 8px; }
-        /* Vertical Wall - Fixed relative to container right */
-        .w-right { top: 0; right: 0; width: 8px; height: 100%; }
-        
-        /* Target - Fixed position relative to right wall */
         .demo-target {
-            position: absolute; width: 30px; height: 30px;
+            position: absolute;
+            right: 15%; /* Always 15% from right */
+            top: 50%;
+            transform: translateY(-50%);
+            width: 32px; height: 32px;
             background: rgba(79, 209, 197, 0.3);
-            border-radius: 8px; 
-            right: 15px; top: 50%; transform: translateY(-50%);
+            border-radius: 8px;
             display: flex; justify-content: center; align-items: center;
-            z-index: 1;
+            z-index: 2;
         }
         .demo-target-inner { width: 12px; height: 12px; background: var(--primary-color); border-radius: 50%; }
         
         .demo-player {
-            position: absolute; width: 26px; height: 26px;
-            background: var(--primary-color); border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(79, 209, 197, 0.4);
+            position: absolute;
+            top: 50%;
+            /* Left will be animated */
+            transform: translateY(-50%);
+            width: 28px; height: 28px;
+            background: var(--primary-color);
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(79, 209, 197, 0.4);
             display: flex; justify-content: center; align-items: center; gap: 4px;
-            top: 50%; 
-            /* Initial Y is handled by calc in animation */
-            margin-top: -13px; /* Center Y explicitly */
-            animation: demoAnim 3s infinite ease-out;
-            z-index: 2;
+            z-index: 3;
+            animation: perfectSlide 3s infinite ease-in-out;
         }
         .demo-eye { width: 4px; height: 4px; background: white; border-radius: 50%; }
 
-        @keyframes demoAnim {
-            0% { left: 0; opacity: 0; transform: scale(0.8); }
-            10% { left: 0; opacity: 1; transform: scale(1); }
-            /* Move across to right wall (100% - player width - wall width - margin) */
-            40% { left: calc(100% - 35px); } 
-            /* Hold */
-            70% { left: calc(100% - 35px); opacity: 1; transform: scale(1); }
-            /* Fade out */
-            85% { left: calc(100% - 35px); opacity: 0; transform: scale(1.2); }
-            100% { left: 0; opacity: 0; }
+        @keyframes perfectSlide {
+            0% { left: 10%; opacity: 0; transform: translateY(-50%) scale(0.8); }
+            15% { left: 10%; opacity: 1; transform: translateY(-50%) scale(1); }
+            45% { left: 70%; } /* Stops visually just before target/wall area */
+            70% { left: 70%; opacity: 1; transform: translateY(-50%) scale(1); }
+            85% { left: 70%; opacity: 0; transform: translateY(-50%) scale(1.2); }
+            100% { left: 10%; opacity: 0; transform: translateY(-50%) scale(0.8); }
         }
 
     </style>
@@ -494,71 +480,71 @@
 
     <!-- MAIN MENU -->
     <div id="screen-menu" class="screen active">
-        <div style="flex:1"></div>
-        <h1>Zen Glider</h1>
+        <h1>Глайдикс</h1>
         
-        <div class="menu-scroll" style="height: 420px;"> <!-- Increased scroll height -->
-            <button class="btn" id="btn-mode-0" onclick="Game.startMode(0)">
-                <div class="btn-content">
-                    <div class="btn-title">Новичок (5x5)</div>
-                    <div class="btn-sub" id="sub-0">Уровень 1</div>
-                </div>
-                <div class="btn-icon"></div>
-            </button>
+        <div class="menu-container">
+            <div class="menu-scroll">
+                <button class="btn" id="btn-mode-0" onclick="Game.startMode(0)">
+                    <div class="btn-content">
+                        <div class="btn-title">Новичок (5x5)</div>
+                        <div class="btn-sub" id="sub-0">Уровень 1</div>
+                    </div>
+                    <div class="btn-icon"></div>
+                </button>
 
-            <button class="btn" id="btn-mode-1" onclick="Game.startMode(1)">
-                <div class="btn-content">
-                    <div class="btn-title">Любитель (6x6)</div>
-                    <div class="btn-sub" id="sub-1">Закрыто</div>
-                </div>
-                <div class="btn-icon"></div>
-            </button>
+                <button class="btn" id="btn-mode-1" onclick="Game.startMode(1)">
+                    <div class="btn-content">
+                        <div class="btn-title">Любитель (6x6)</div>
+                        <div class="btn-sub" id="sub-1">Закрыто</div>
+                    </div>
+                    <div class="btn-icon"></div>
+                </button>
 
-            <button class="btn" id="btn-mode-2" onclick="Game.startMode(2)">
-                <div class="btn-content">
-                    <div class="btn-title">Мастер (8x8)</div>
-                    <div class="btn-sub" id="sub-2">Закрыто</div>
-                </div>
-                <div class="btn-icon"></div>
-            </button>
-            
-            <button class="btn" id="btn-mode-3" onclick="Game.startMode(3)">
-                <div class="btn-content">
-                    <div class="btn-title">Эксперт (10x10)</div>
-                    <div class="btn-sub" id="sub-3">Закрыто</div>
-                </div>
-                <div class="btn-icon"></div>
-            </button>
-            
-            <button class="btn" id="btn-mode-4" onclick="Game.startMode(4)">
-                <div class="btn-content">
-                    <div class="btn-title">Гуру (12x12)</div>
-                    <div class="btn-sub" id="sub-4">Закрыто</div>
-                </div>
-                <div class="btn-icon"></div>
-            </button>
+                <button class="btn" id="btn-mode-2" onclick="Game.startMode(2)">
+                    <div class="btn-content">
+                        <div class="btn-title">Мастер (8x8)</div>
+                        <div class="btn-sub" id="sub-2">Закрыто</div>
+                    </div>
+                    <div class="btn-icon"></div>
+                </button>
+                
+                <button class="btn" id="btn-mode-3" onclick="Game.startMode(3)">
+                    <div class="btn-content">
+                        <div class="btn-title">Эксперт (10x10)</div>
+                        <div class="btn-sub" id="sub-3">Закрыто</div>
+                    </div>
+                    <div class="btn-icon"></div>
+                </button>
+                
+                <button class="btn" id="btn-mode-4" onclick="Game.startMode(4)">
+                    <div class="btn-content">
+                        <div class="btn-title">Гуру (12x12)</div>
+                        <div class="btn-sub" id="sub-4">Закрыто</div>
+                    </div>
+                    <div class="btn-icon"></div>
+                </button>
 
-            <button class="btn secondary centered" onclick="Game.showOtherGames()">
-                <div class="btn-content">Другие игры</div>
-            </button>
+                <button class="btn secondary centered" onclick="Game.showOtherGames()">
+                    <div class="btn-content">Другие игры</div>
+                </button>
+            </div>
         </div>
         
-        <div style="display: flex; justify-content: center; width: 100%; margin-top: 5px;">
+        <div style="display: flex; justify-content: center; width: 100%; margin-top: 10px; margin-bottom: 20px;">
             <button class="btn btn-small-icon" onclick="Game.showSettings()">
-                <svg viewBox="0 0 24 24" class="icon-svg" style="width:28px;height:28px;"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L3.16 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"></path></svg>
+                <svg viewBox="0 0 24 24" class="icon-svg" style="width:24px;height:24px;"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L3.16 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"></path></svg>
             </button>
             <button class="btn btn-small-icon" onclick="Game.showRules()">
                 <span style="font-size: 1.5rem; font-weight: 900;">?</span>
             </button>
         </div>
-        <div style="flex:1"></div>
     </div>
 
     <!-- OTHER GAMES SCREEN -->
     <div id="screen-other-games" class="screen">
         <div class="modal-card" style="width: 100%; max-width: 400px; padding: 25px;">
             <h2>Другие игры</h2>
-            <div class="menu-scroll" style="height: 350px;">
+            <div class="menu-scroll" style="height: 320px;">
                 <div class="games-grid" id="other-games-container"></div>
             </div>
             <button class="btn highlight centered" onclick="Game.showMenu()" style="width: 100%; margin: 20px 0 0 0;">Назад</button>
@@ -590,26 +576,19 @@
         <div class="modal-card">
             <h2>Правила</h2>
             <div class="rules-demo">
-                <!-- Inner container for safe calculations -->
-                <div class="demo-container">
-                    <div class="demo-wall w-top"></div>
-                    <div class="demo-wall w-bot"></div>
-                    <div class="demo-wall w-right"></div>
-                    
-                    <div class="demo-target">
-                        <div class="demo-target-inner"></div>
-                    </div>
-                    <div class="demo-player">
-                        <div class="demo-eye"></div><div class="demo-eye"></div>
-                    </div>
+                <div class="demo-wall w-top"></div>
+                <div class="demo-wall w-bot"></div>
+                <div class="demo-wall w-right"></div>
+                
+                <div class="demo-target">
+                    <div class="demo-target-inner"></div>
+                </div>
+                <div class="demo-player">
+                    <div class="demo-eye"></div><div class="demo-eye"></div>
                 </div>
             </div>
 
-            <p style="text-align: left; font-size: 0.95rem;">
-                1. Свайпай для движения.<br>
-                2. Остановка только у стен.<br>
-                3. Цель: зеленая зона.<br>
-            </p>
+            <p>1. Свайпай для движения.<br>2. Остановка только у стен.<br>3. Цель: зеленая зона.</p>
             <button class="btn highlight centered" onclick="Game.showMenu()" style="width: 100%; margin: 0;">Понятно</button>
         </div>
     </div>
@@ -702,6 +681,27 @@ class AudioManager {
         setTimeout(() => this.playTone(400, 'sine', 0.2), 150);
         setTimeout(() => this.playTone(500, 'sine', 0.2), 300);
         setTimeout(() => this.playTone(600, 'sine', 0.4), 450);
+    }
+    
+    // Taptic / Haptic Feedback
+    vibrate(type) {
+        // 1. VK Bridge Taptic
+        if (typeof vkBridge !== 'undefined' && vkBridge.send) {
+            try {
+                if (type === 'light') vkBridge.send('VKWebAppTapticImpactOccurred', {style: 'light'});
+                else if (type === 'medium') vkBridge.send('VKWebAppTapticImpactOccurred', {style: 'medium'});
+                else if (type === 'heavy') vkBridge.send('VKWebAppTapticImpactOccurred', {style: 'heavy'});
+                else if (type === 'success') vkBridge.send('VKWebAppTapticNotificationOccurred', {type: 'success'});
+                return;
+            } catch(e) {}
+        }
+        // 2. Web API Fallback
+        if (navigator.vibrate) {
+            if (type === 'light') navigator.vibrate(10);
+            else if (type === 'medium') navigator.vibrate(20);
+            else if (type === 'heavy') navigator.vibrate(40);
+            else if (type === 'success') navigator.vibrate([50, 30, 50]);
+        }
     }
 }
 
@@ -939,7 +939,10 @@ class ZenGlider {
     toggleSound() {
         this.state.settings.sound = !this.state.settings.sound;
         this.audio.enabled = this.state.settings.sound;
-        if(this.state.settings.sound) this.audio.playClick();
+        if(this.state.settings.sound) {
+            this.audio.playClick();
+            this.audio.vibrate('light');
+        }
         this.saveProgress(false);
         this.updateSettingsUI();
     }
@@ -949,6 +952,7 @@ class ZenGlider {
         document.body.classList.toggle('dark-mode');
         this.updateThemeColors();
         this.audio.playClick();
+        this.audio.vibrate('light');
         this.saveProgress(false);
         this.updateSettingsUI();
         this.draw(); 
@@ -983,6 +987,7 @@ class ZenGlider {
         if (!this.state.unlocks[modeIndex]) return;
         this.state.mode = modeIndex;
         this.audio.playClick();
+        this.audio.vibrate('light');
         document.querySelectorAll('.screen').forEach(el => el.classList.remove('active'));
         document.getElementById('hud').classList.remove('hidden');
         if (this.savedLevel && this.savedLevel.modeIndex === modeIndex) {
@@ -1031,6 +1036,7 @@ class ZenGlider {
 
     finishLevelAndNext() {
         this.audio.playClick();
+        this.audio.vibrate('light');
         document.getElementById('screen-win').classList.remove('active');
         this.savedLevel = null;
         this.generateNewLevel();
@@ -1038,12 +1044,14 @@ class ZenGlider {
     
     switchToNextMode() {
         this.audio.playClick();
+        this.audio.vibrate('success');
         document.getElementById('screen-unlock').classList.remove('active');
         this.startMode(this.state.mode + 1);
     }
     
     stayOnCurrentMode() {
         this.audio.playClick();
+        this.audio.vibrate('light');
         document.getElementById('screen-unlock').classList.remove('active');
         this.finishLevelAndNext();
     }
@@ -1097,6 +1105,7 @@ class ZenGlider {
         pauseBtn.onclick = (e) => {
             e.stopPropagation(); 
             if(this.state.status === 'playing') {
+                this.audio.vibrate('light');
                 this.state.status = 'pause';
                 document.getElementById('screen-pause').classList.add('active');
             }
@@ -1107,6 +1116,7 @@ class ZenGlider {
         resetBtn.onclick = (e) => {
             e.stopPropagation(); 
             this.audio.playClick();
+            this.audio.vibrate('medium');
             this.loadLevel(this.state.levelData);
         };
         resetBtn.addEventListener('touchstart', (e) => e.stopPropagation());
@@ -1133,6 +1143,7 @@ class ZenGlider {
             this.state.player.moving = true;
             this.state.moves++;
             this.audio.playMove();
+            this.audio.vibrate('light');
         }
     }
 
@@ -1173,6 +1184,7 @@ class ZenGlider {
 
     onMoveEnd() {
         this.audio.playHit();
+        this.audio.vibrate('medium');
         for(let i=0; i<4; i++) {
             this.spawnParticle(
                 this.offsetX + this.state.player.x * this.cellSize + this.cellSize/2,
@@ -1196,8 +1208,10 @@ class ZenGlider {
         if (currentWins === this.winsToUnlock && this.state.mode < 4) {
             justUnlocked = true;
             this.audio.playUnlock();
+            this.audio.vibrate('success');
         } else {
             this.audio.playWin();
+            this.audio.vibrate('success');
         }
 
         this.savedLevel = null; 
@@ -1387,6 +1401,7 @@ class ZenGlider {
 
     showMenu() {
         this.state.status = 'menu';
+        this.audio.vibrate('light');
         document.querySelectorAll('.screen').forEach(el => el.classList.remove('active'));
         document.getElementById('screen-menu').classList.add('active');
         document.getElementById('hud').classList.add('hidden');
@@ -1394,16 +1409,19 @@ class ZenGlider {
     }
     
     showSettings() {
+        this.audio.vibrate('light');
         document.getElementById('screen-settings').classList.add('active');
     }
     
     showRules() {
+        this.audio.vibrate('light');
         document.getElementById('screen-settings').classList.remove('active');
         document.getElementById('screen-menu').classList.remove('active');
         document.getElementById('screen-rules').classList.add('active');
     }
     
     showOtherGames() {
+        this.audio.vibrate('light');
         document.getElementById('screen-menu').classList.remove('active');
         document.getElementById('screen-other-games').classList.add('active');
     }
@@ -1429,6 +1447,7 @@ class ZenGlider {
             const item = document.createElement('div');
             item.className = 'game-item';
             item.onclick = () => {
+                this.audio.vibrate('light');
                 if (typeof vkBridge !== 'undefined') {
                     vkBridge.send('VKWebAppOpenApp', { app_id: game.appId });
                 } else {
@@ -1448,6 +1467,7 @@ class ZenGlider {
 
     resumeGame() {
         this.state.status = 'playing';
+        this.audio.vibrate('light');
         document.getElementById('screen-pause').classList.remove('active');
     }
 

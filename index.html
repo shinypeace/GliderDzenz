@@ -10,14 +10,14 @@
         @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap');
 
         :root {
-            /* Light Theme (Default) */
+            /* Light Theme */
             --bg-color: #eef2f5;
             --text-color: #2d3748;
             --primary-color: #4fd1c5;
             --primary-dark: #38b2ac;
             --wall-color: #a0aec0;
             --floor-color: #e2e8f0;
-            --glass-bg: rgba(255, 255, 255, 0.92);
+            --glass-bg: rgba(255, 255, 255, 0.95);
             --shadow-light: #ffffff;
             --shadow-dark: #d1d9e6;
             --modal-bg: white;
@@ -32,7 +32,7 @@
             --primary-dark: #81e6d9;
             --wall-color: #718096;
             --floor-color: #111319;
-            --glass-bg: rgba(26, 32, 44, 0.95);
+            --glass-bg: rgba(26, 32, 44, 0.98);
             --shadow-light: #2d3748;
             --shadow-dark: #000000;
             --modal-bg: #2d3748;
@@ -117,14 +117,15 @@
 
         /* --- TYPOGRAPHY --- */
         h1 {
-            font-size: 3.2rem;
-            margin: 0 0 1rem 0;
+            font-size: 3.5rem;
+            margin: 0 0 2rem 0;
             background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.1));
             letter-spacing: -1px;
             text-align: center;
+            line-height: 1.1;
         }
         
         h2 {
@@ -146,18 +147,17 @@
         .btn {
             background: var(--bg-color);
             border: none;
-            /* Balanced padding: tall enough to touch, short enough to fit */
-            padding: 16px 24px; 
-            font-size: 1.1rem;
+            padding: 18px 24px;
+            font-size: 1.2rem;
             font-weight: 700;
             color: var(--btn-text);
             border-radius: 20px;
-            margin: 8px auto; /* Tighter margins */
+            margin: 10px auto;
             cursor: pointer;
             box-shadow:  6px 6px 12px var(--shadow-dark),
                         -6px -6px 12px var(--shadow-light);
             transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.3s;
-            width: 90%;
+            width: 100%;
             max-width: 320px;
             display: flex;
             justify-content: space-between;
@@ -182,26 +182,29 @@
             filter: grayscale(1);
         }
         
-        /* Secondary / Centered Button */
+        /* Main Menu Big Buttons */
+        .btn-main {
+            justify-content: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 1.3rem;
+            height: 80px; /* Fixed height for consistency */
+        }
+        
         .btn.secondary {
             border: 2px solid var(--primary-color);
             background: transparent;
             color: var(--primary-color);
-            justify-content: center;
-            text-align: center;
         }
-        .btn.secondary .icon-svg { fill: var(--primary-color); }
-        .btn.secondary .btn-content { text-align: center; flex: 0 0 auto; }
-
-        .btn.centered {
-            justify-content: center;
-            text-align: center;
-        }
-        .btn.centered .btn-content { flex: 0 0 auto; }
 
         .btn-content { text-align: left; flex: 1; }
         .btn-title { font-size: 1.15rem; }
         .btn-sub { font-size: 0.85rem; opacity: 0.6; margin-top: 2px; font-weight: 500; }
+
+        .btn-icon {
+            width: 40px; height: 40px;
+            display: flex; justify-content: center; align-items: center;
+        }
 
         .btn-small-icon {
             width: 55px;
@@ -212,9 +215,7 @@
             align-items: center;
             padding: 0;
             margin: 0 10px;
-            font-size: 1.5rem;
             display: flex;
-            flex-direction: row; 
         }
         
         /* Icons */
@@ -324,11 +325,10 @@
         .stat-val { font-size: 1.4rem; font-weight: 900; color: var(--text-color); }
         .stat-label { font-size: 0.7rem; opacity: 0.6; text-transform: uppercase; letter-spacing: 1px; margin-top: 5px; }
 
-        /* --- MENU SCROLL --- */
+        /* --- SCROLL CONTAINERS --- */
         .menu-scroll {
             width: 100%;
-            /* Allow flexible height but constrained by container */
-            flex: 1; 
+            flex: 1;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
@@ -337,16 +337,15 @@
             scrollbar-width: none;
             mask-image: linear-gradient(to bottom, transparent, black 10px, black 90%, transparent);
             -webkit-mask-image: linear-gradient(to bottom, transparent, black 10px, black 90%, transparent);
-            /* Min height to ensure scrollability on small screens if needed */
             min-height: 0;
         }
         .menu-scroll::-webkit-scrollbar { display: none; }
         
-        /* --- OTHER GAMES GRID --- */
+        /* --- OTHER GAMES GRID (Tailwind Imitation) --- */
         .games-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
+            gap: 16px 16px; /* gap-x-4 gap-y-5 approx */
             width: 100%;
             padding: 10px 0;
         }
@@ -357,29 +356,37 @@
             cursor: pointer;
             transition: transform 0.2s;
         }
-        .game-item:active { transform: scale(0.95); }
-        .game-icon-box {
-            width: 70px;
-            height: 70px;
-            background: var(--floor-color);
-            border-radius: 18px;
-            margin-bottom: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        /* Group hover effect */
+        .game-item:hover .game-icon-box {
+            transform: scale(1.05);
         }
-        .game-icon-img { width: 100%; height: 100%; object-fit: cover; }
+        .game-icon-box {
+            width: 80px; /* w-20 */
+            height: 80px; /* h-20 */
+            background-color: #e5e7eb; /* bg-gray-200 */
+            border-radius: 1.5rem; /* rounded-3xl */
+            margin-bottom: 0.5rem; /* mb-2 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+        body.dark-mode .game-icon-box { background-color: #374151; /* dark:bg-gray-700 */ }
+        
+        .game-icon-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
         .game-title {
-            font-size: 0.75rem;
-            font-weight: 700;
+            font-size: 0.75rem; /* text-xs */
+            font-weight: 500; /* font-medium */
             text-align: center;
-            line-height: 1.2;
             color: var(--text-color);
         }
 
-        /* --- RULES ANIMATION (FIXED) --- */
+        /* --- RULES ANIMATION --- */
         .rules-demo {
             width: 280px;
             height: 100px;
@@ -392,8 +399,6 @@
         }
         
         .demo-wall { position: absolute; background: var(--wall-color); border-radius: 2px; }
-        
-        /* Full Box */
         .w-top { top: 0; left: 0; width: 100%; height: 6px; }
         .w-bot { bottom: 0; left: 0; width: 100%; height: 6px; }
         .w-left { top: 0; left: 0; width: 6px; height: 100%; }
@@ -403,8 +408,7 @@
             position: absolute; width: 30px; height: 30px;
             background: rgba(79, 209, 197, 0.3);
             border-radius: 8px; 
-            right: 6px;
-            top: 35px;
+            right: 6px; top: 35px;
             display: flex; justify-content: center; align-items: center;
         }
         .demo-target-inner { width: 12px; height: 12px; background: var(--primary-color); border-radius: 50%; }
@@ -446,12 +450,36 @@
         </div>
     </div>
 
-    <!-- MAIN MENU -->
-    <div id="screen-menu" class="screen active">
+    <!-- MAIN START SCREEN -->
+    <div id="screen-main" class="screen active">
         <div style="flex:1"></div>
         <h1>Глайдикс</h1>
         
-        <div class="menu-scroll" style="height: 350px;">
+        <div style="width: 100%; max-width: 340px; display: flex; flex-direction: column; gap: 20px;">
+            <button class="btn btn-main highlight" onclick="Game.showLevelSelection()">
+                ИГРАТЬ
+            </button>
+
+            <button class="btn btn-main secondary" onclick="Game.showOtherGames()">
+                ДРУГИЕ ИГРЫ
+            </button>
+        </div>
+        
+        <div style="display: flex; justify-content: center; width: 100%; margin-top: 40px; gap: 15px;">
+            <button class="btn btn-small-icon" onclick="Game.showSettings()">
+                <svg viewBox="0 0 24 24" class="icon-svg" style="width:28px;height:28px;"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L3.16 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"></path></svg>
+            </button>
+            <button class="btn btn-small-icon" onclick="Game.showRules()">
+                <span style="font-size: 1.5rem; font-weight: 900;">?</span>
+            </button>
+        </div>
+        <div style="flex:1"></div>
+    </div>
+
+    <!-- LEVEL SELECTION SCREEN -->
+    <div id="screen-levels" class="screen">
+        <h2 style="margin-bottom: 10px;">Уровни</h2>
+        <div class="menu-scroll" style="padding-bottom: 20px;">
             <button class="btn" id="btn-mode-0" onclick="Game.startMode(0)">
                 <div class="btn-content">
                     <div class="btn-title">Новичок (5x5)</div>
@@ -491,31 +519,18 @@
                 </div>
                 <div class="btn-icon"></div>
             </button>
-
-            <button class="btn secondary centered" onclick="Game.showOtherGames()">
-                <div class="btn-content">Другие игры</div>
-            </button>
         </div>
-        
-        <div style="display: flex; justify-content: center; width: 100%; margin-top: 10px;">
-            <button class="btn btn-small-icon" onclick="Game.showSettings()">
-                <svg viewBox="0 0 24 24" class="icon-svg" style="width:28px;height:28px;"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L3.16 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"></path></svg>
-            </button>
-            <button class="btn btn-small-icon" onclick="Game.showRules()">
-                <span style="font-size: 1.5rem; font-weight: 900;">?</span>
-            </button>
-        </div>
-        <div style="flex:1"></div>
+        <button class="btn btn-main highlight" onclick="Game.showMenu()" style="width: 90%; margin-top: 10px; height: 60px;">Назад</button>
     </div>
 
     <!-- OTHER GAMES SCREEN -->
     <div id="screen-other-games" class="screen">
         <div class="modal-card" style="width: 100%; max-width: 400px; padding: 25px;">
-            <h2>Другие игры</h2>
+            <h2 class="text-3xl font-bold mb-6">Другие игры</h2>
             <div class="menu-scroll" style="height: 350px;">
                 <div class="games-grid" id="other-games-container"></div>
             </div>
-            <button class="btn highlight centered" onclick="Game.showMenu()" style="width: 100%; margin: 20px 0 0 0;">Назад</button>
+            <button class="btn btn-main secondary" onclick="Game.showMenu()" style="width: 100%; margin-top: 20px; height: 60px;">Назад</button>
         </div>
     </div>
 
@@ -531,6 +546,13 @@
                 </div>
             </div>
 
+            <div class="toggle-row" onclick="Game.toggleVibration()">
+                <span class="btn-title">Вибрация</span>
+                <div class="toggle-switch" id="toggle-vibration">
+                    <div class="toggle-knob"></div>
+                </div>
+            </div>
+
             <div class="toggle-row" onclick="Game.toggleTheme()">
                 <span class="btn-title">Темная тема</span>
                 <div class="toggle-switch" id="toggle-theme">
@@ -538,7 +560,7 @@
                 </div>
             </div>
 
-            <button class="btn highlight centered" onclick="Game.showMenu()" style="width: 100%; margin: 20px 0 0 0;">Готово</button>
+            <button class="btn btn-main highlight" onclick="Game.showMenu()" style="width: 100%; margin-top: 20px; height: 60px;">Готово</button>
         </div>
     </div>
 
@@ -565,7 +587,7 @@
                 2. Остановка только у стен.<br>
                 3. Цель: зеленая зона.<br>
             </p>
-            <button class="btn highlight centered" onclick="Game.showMenu()" style="width: 100%; margin: 0;">Понятно</button>
+            <button class="btn btn-main highlight" onclick="Game.showMenu()" style="width: 100%; margin: 0; height: 60px;">Понятно</button>
         </div>
     </div>
 
@@ -573,8 +595,8 @@
     <div id="screen-pause" class="screen">
         <div class="modal-card">
             <h2>Пауза</h2>
-            <button class="btn highlight centered" onclick="Game.resumeGame()" style="width: 100%; margin: 10px 0;">Продолжить</button>
-            <button class="btn centered" onclick="Game.quitToMenu()" style="width: 100%; margin: 10px 0;">В меню</button>
+            <button class="btn btn-main highlight" onclick="Game.resumeGame()" style="width: 100%; margin: 10px 0; height: 60px;">Продолжить</button>
+            <button class="btn btn-main secondary" onclick="Game.quitToMenu()" style="width: 100%; margin: 10px 0; height: 60px;">В меню</button>
         </div>
     </div>
 
@@ -593,8 +615,8 @@
                     <div class="stat-label">Побед</div>
                 </div>
             </div>
-            <button class="btn highlight centered" onclick="Game.finishLevelAndNext()" style="width: 100%; margin: 10px 0;">Дальше</button>
-            <button class="btn centered" onclick="Game.quitToMenu()" style="width: 100%; margin: 10px 0;">В меню</button>
+            <button class="btn btn-main highlight" onclick="Game.finishLevelAndNext()" style="width: 100%; margin: 10px 0; height: 60px;">Дальше</button>
+            <button class="btn btn-main secondary" onclick="Game.quitToMenu()" style="width: 100%; margin: 10px 0; height: 60px;">В меню</button>
         </div>
     </div>
 
@@ -604,8 +626,8 @@
             <span style="font-size: 3rem;">🔓</span>
             <h2>Новый уровень!</h2>
             <p>Ты настоящий мастер. Следующая сложность открыта.</p>
-            <button class="btn highlight centered" onclick="Game.switchToNextMode()" style="width: 100%; margin: 10px 0;">Перейти</button>
-            <button class="btn centered" onclick="Game.stayOnCurrentMode()" style="width: 100%; margin: 10px 0;">Остаться</button>
+            <button class="btn btn-main highlight" onclick="Game.switchToNextMode()" style="width: 100%; margin: 10px 0; height: 60px;">Перейти</button>
+            <button class="btn btn-main secondary" onclick="Game.stayOnCurrentMode()" style="width: 100%; margin: 10px 0; height: 60px;">Остаться</button>
         </div>
     </div>
 
@@ -619,6 +641,7 @@ class AudioManager {
         this.masterGain.gain.value = 0.3;
         this.masterGain.connect(this.ctx.destination);
         this.enabled = true;
+        this.vibration = true;
     }
 
     playTone(freq, type, duration, slideFreq = null) {
@@ -661,6 +684,7 @@ class AudioManager {
     
     // Taptic
     vibrate(type) {
+        if (!this.vibration) return;
         if (typeof vkBridge !== 'undefined' && vkBridge.send) {
             try {
                 if (type === 'light') vkBridge.send('VKWebAppTapticImpactOccurred', {style: 'light'});
@@ -780,13 +804,13 @@ class LevelGenerator {
 class ZenGlider {
     constructor() {
         this.canvas = document.getElementById('gameCanvas');
-        this.ctx = this.canvas.getContext('2d', { alpha: false }); // Optimization
+        this.ctx = this.canvas.getContext('2d', { alpha: false }); 
         this.audio = new AudioManager();
         
         this.winsToUnlock = 20;
         this.vkUserId = null;
         
-        this.levelsSinceAd = 0; // Ad counter
+        this.levelsSinceAd = 0;
 
         this.state = {
             mode: 0,
@@ -796,7 +820,7 @@ class ZenGlider {
             wins: [0, 0, 0, 0, 0], 
             unlocks: [true, false, false, false, false],
             status: 'menu',
-            settings: { sound: true, dark: false }
+            settings: { sound: true, vibration: true, dark: false }
         };
 
         this.particles = [];
@@ -816,7 +840,7 @@ class ZenGlider {
         
         // VK Initialization & Loading
         this.initVK().then(() => {
-             this.loadProgress(); // Load after VK init (to get UserID)
+             this.loadProgress(); 
              this.initAfterLoad();
         });
 
@@ -837,27 +861,23 @@ class ZenGlider {
                 await vkBridge.send('VKWebAppInit');
                 // Banner Ad
                 vkBridge.send('VKWebAppShowBannerAd', { banner_location: 'bottom' }).catch(e => console.log('Ad error', e));
-                
-                // Check ads
+                // Interstitial check
                 vkBridge.send('VKWebAppCheckNativeAds', { ad_format: 'interstitial' });
 
-                // User Info
                 const user = await vkBridge.send('VKWebAppGetUserInfo');
                 this.vkUserId = user.id;
             } catch (error) {
-                console.warn("VK Bridge Init Error or User Info Error:", error);
+                console.warn("VK Bridge Init Error:", error);
             }
         }
     }
     
     initAfterLoad() {
-        // Theme init
         if (this.state.settings.dark) {
             document.body.classList.add('dark-mode');
             this.updateThemeColors();
         }
         this.updateSettingsUI();
-        this.updateMenuUI();
     }
 
     updateThemeColors() {
@@ -869,7 +889,6 @@ class ZenGlider {
     }
 
     async loadProgress() {
-        // 1. Try VK Storage if User ID exists
         if (this.vkUserId) {
              const storageKey = `zenglider_data_${this.vkUserId}`;
              try {
@@ -881,7 +900,6 @@ class ZenGlider {
              } catch(e) { console.warn("VK Storage Load Failed", e); }
         }
 
-        // 2. Fallback to LocalStorage
         const saved = localStorage.getItem('zenGliderSave_v4');
         if (saved) {
             this.applyData(JSON.parse(saved));
@@ -892,11 +910,11 @@ class ZenGlider {
         this.state.wins = parsed.wins || [0,0,0,0,0];
         if (parsed.currentLevel) this.savedLevel = parsed.currentLevel;
         if (parsed.settings) {
-            this.state.settings = parsed.settings;
+            this.state.settings = { ...this.state.settings, ...parsed.settings };
             this.audio.enabled = this.state.settings.sound;
+            this.audio.vibration = this.state.settings.vibration;
         }
         this.checkUnlocks();
-        // Force update UI after data application since this might be async
         this.updateMenuUI(); 
         this.updateSettingsUI();
         if(this.state.settings.dark) {
@@ -914,15 +932,12 @@ class ZenGlider {
         };
         const dataStr = JSON.stringify(data);
         
-        // 1. VK Storage
         if (this.vkUserId) {
             const storageKey = `zenglider_data_${this.vkUserId}`;
             vkBridge.send('VKWebAppStorageSet', { key: storageKey, value: dataStr }).catch(e => console.warn(e));
         }
         
-        // 2. Local Storage (always as backup)
         localStorage.setItem('zenGliderSave_v4', dataStr);
-        
         this.updateMenuUI();
     }
 
@@ -937,6 +952,14 @@ class ZenGlider {
         this.updateSettingsUI();
     }
 
+    toggleVibration() {
+        this.state.settings.vibration = !this.state.settings.vibration;
+        this.audio.vibration = this.state.settings.vibration;
+        if(this.state.settings.vibration) this.audio.vibrate('success');
+        this.saveProgress(false);
+        this.updateSettingsUI();
+    }
+
     toggleTheme() {
         this.state.settings.dark = !this.state.settings.dark;
         document.body.classList.toggle('dark-mode');
@@ -945,13 +968,16 @@ class ZenGlider {
         this.audio.vibrate('light');
         this.saveProgress(false);
         this.updateSettingsUI();
-        this.draw(); // Redraw immediately
+        this.draw(); 
     }
 
     updateSettingsUI() {
         const soundEl = document.getElementById('toggle-sound');
+        const vibEl = document.getElementById('toggle-vibration');
         const themeEl = document.getElementById('toggle-theme');
+        
         if (this.state.settings.sound) soundEl.classList.add('on'); else soundEl.classList.remove('on');
+        if (this.state.settings.vibration) vibEl.classList.add('on'); else vibEl.classList.remove('on');
         if (this.state.settings.dark) themeEl.classList.add('on'); else themeEl.classList.remove('on');
     }
 
@@ -971,6 +997,21 @@ class ZenGlider {
         this.virtualWidth = parent.clientWidth;
         this.virtualHeight = parent.clientHeight;
         this.draw();
+    }
+
+    showMenu() {
+        this.state.status = 'menu';
+        this.audio.vibrate('light');
+        document.querySelectorAll('.screen').forEach(el => el.classList.remove('active'));
+        document.getElementById('screen-main').classList.add('active');
+        document.getElementById('hud').classList.add('hidden');
+    }
+
+    showLevelSelection() {
+        this.audio.vibrate('light');
+        document.getElementById('screen-main').classList.remove('active');
+        document.getElementById('screen-levels').classList.add('active');
+        this.updateMenuUI();
     }
 
     startMode(modeIndex) {
@@ -1068,7 +1109,7 @@ class ZenGlider {
                 if (Math.abs(dy) > 30) this.move(0, dy > 0 ? 1 : -1);
             }
             this.isDragging = false;
-            startX = null; // Reset
+            startX = null; 
         };
 
         this.canvas.addEventListener('touchstart', e => handleStart(e.touches[0].clientX, e.touches[0].clientY), {passive: false});
@@ -1079,7 +1120,6 @@ class ZenGlider {
 
         this.canvas.addEventListener('mousedown', e => handleStart(e.clientX, e.clientY));
         
-        // Fixed: Check isDragging before processing mouseup globally
         window.addEventListener('mouseup', e => {
             if(this.isDragging) handleEnd(e.clientX, e.clientY);
         });
@@ -1094,14 +1134,13 @@ class ZenGlider {
 
         const pauseBtn = document.getElementById('btn-pause');
         pauseBtn.onclick = (e) => {
-            e.stopPropagation(); // Stop click from triggering game inputs
+            e.stopPropagation(); 
             if(this.state.status === 'playing') {
                 this.audio.vibrate('light');
                 this.state.status = 'pause';
                 document.getElementById('screen-pause').classList.add('active');
             }
         };
-        // Prevent touchstart propagation specifically
         pauseBtn.addEventListener('touchstart', (e) => e.stopPropagation());
 
         const resetBtn = document.getElementById('btn-reset');
@@ -1206,9 +1245,9 @@ class ZenGlider {
             this.audio.vibrate('success');
         }
 
-        // Ad Logic
+        // Ad Logic (Fixed for proper thresholds)
         this.levelsSinceAd++;
-        let adThreshold = 10; // Default for 0 & 1
+        let adThreshold = 10;
         if (this.state.mode === 2 || this.state.mode === 3) adThreshold = 6;
         if (this.state.mode === 4) adThreshold = 4;
 
@@ -1256,13 +1295,11 @@ class ZenGlider {
 
     draw() {
         // --- FIX FOR GHOST SQUARE ---
-        // 1. Force Reset shadow
         this.ctx.shadowBlur = 0;
         this.ctx.shadowOffsetX = 0;
         this.ctx.shadowOffsetY = 0;
         this.ctx.shadowColor = 'transparent';
         
-        // 2. Clear entire canvas BUFFER
         this.ctx.fillStyle = this.colors.bg;
         this.ctx.save();
         this.ctx.setTransform(1, 0, 0, 1, 0, 0); 
@@ -1275,13 +1312,11 @@ class ZenGlider {
         const cs = this.cellSize;
         const pad = 3;
 
-        // Floor - Batched drawing to prevent partial renders/artifacts
         this.ctx.save();
         this.ctx.fillStyle = this.colors.floor;
-        this.ctx.beginPath(); // Start one path for ALL tiles
+        this.ctx.beginPath(); 
         for(let y=0; y<ld.height; y++) {
             for(let x=0; x<ld.width; x++) {
-                // Add to current path without clearing
                 this.addRoundedRectPath(
                     this.offsetX + x*cs + pad, 
                     this.offsetY + y*cs + pad, 
@@ -1289,10 +1324,9 @@ class ZenGlider {
                 );
             }
         }
-        this.ctx.fill(); // Fill once
+        this.ctx.fill(); 
         this.ctx.restore();
 
-        // Target
         this.ctx.save();
         this.ctx.fillStyle = this.colors.target;
         let tx = this.offsetX + ld.end.x*cs + pad;
@@ -1309,7 +1343,6 @@ class ZenGlider {
         this.ctx.fill();
         this.ctx.restore();
 
-        // Walls
         this.ctx.save();
         this.ctx.fillStyle = this.colors.wall;
         this.ctx.shadowColor = this.colors.wallShadow;
@@ -1325,7 +1358,6 @@ class ZenGlider {
         this.ctx.fill();
         this.ctx.restore();
 
-        // Player
         const p = this.state.player;
         this.ctx.save();
         this.ctx.fillStyle = this.colors.player;
@@ -1339,7 +1371,6 @@ class ZenGlider {
         this.ctx.fill();
         this.ctx.restore();
 
-        // Eyes
         this.ctx.fillStyle = 'white';
         let psize = cs - pad*2;
         this.ctx.beginPath();
@@ -1347,7 +1378,6 @@ class ZenGlider {
         this.ctx.arc(px + psize*0.7, py + psize*0.4, psize*0.1, 0, Math.PI*2);
         this.ctx.fill();
 
-        // Particles
         for(let part of this.particles) {
             this.ctx.globalAlpha = part.life;
             this.ctx.fillStyle = part.color;
@@ -1358,14 +1388,12 @@ class ZenGlider {
         this.ctx.globalAlpha = 1.0;
     }
 
-    // Helper for single draw
     drawRoundedRect(x, y, w, h, r) {
         this.ctx.beginPath();
         this.addRoundedRectPath(x, y, w, h, r);
         this.ctx.closePath();
     }
     
-    // Helper for adding to path (fixed logic error)
     addRoundedRectPath(x, y, w, h, r) {
         this.ctx.moveTo(x + r, y);
         this.ctx.lineTo(x + w - r, y);
@@ -1418,8 +1446,14 @@ class ZenGlider {
         this.state.status = 'menu';
         this.audio.vibrate('light');
         document.querySelectorAll('.screen').forEach(el => el.classList.remove('active'));
-        document.getElementById('screen-menu').classList.add('active');
+        document.getElementById('screen-main').classList.add('active');
         document.getElementById('hud').classList.add('hidden');
+    }
+    
+    showLevelSelection() {
+        this.audio.vibrate('light');
+        document.getElementById('screen-main').classList.remove('active');
+        document.getElementById('screen-levels').classList.add('active');
         this.updateMenuUI();
     }
     
@@ -1431,13 +1465,14 @@ class ZenGlider {
     showRules() {
         this.audio.vibrate('light');
         document.getElementById('screen-settings').classList.remove('active');
-        document.getElementById('screen-menu').classList.remove('active');
+        document.getElementById('screen-menu').classList.remove('active'); // legacy fallback
+        document.getElementById('screen-main').classList.remove('active');
         document.getElementById('screen-rules').classList.add('active');
     }
     
     showOtherGames() {
         this.audio.vibrate('light');
-        document.getElementById('screen-menu').classList.remove('active');
+        document.getElementById('screen-main').classList.remove('active');
         document.getElementById('screen-other-games').classList.add('active');
     }
     
@@ -1470,8 +1505,7 @@ class ZenGlider {
                 }
             };
             
-            // Note: Since I don't have the actual icon files, I'm using a placeholder logic 
-            // but keeping the 'src' pointing to what you asked for.
+            // Note: Using placeholder colors for icons since files aren't physically present
             item.innerHTML = `
                 <div class="game-icon-box">
                     <img src="${game.icon}" alt="${game.name}" class="game-icon-img" onerror="this.style.display='none';this.parentNode.style.backgroundColor='#cbd5e0'">

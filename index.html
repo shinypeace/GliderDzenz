@@ -182,29 +182,35 @@
             filter: grayscale(1);
         }
         
-        /* Main Menu Big Buttons */
-        .btn-main {
+        /* Main Action Buttons (Play/Other/Pause/Win) */
+        .btn-action {
+            width: 100%;
+            max-width: 320px;
+            height: 75px; /* Fixed equal height */
+            display: flex;
             justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-            font-size: 1.3rem;
-            height: 80px; /* Fixed height for consistency */
+            margin: 8px 0; /* Consistent spacing */
         }
-        
+        .btn-action .btn-content {
+            text-align: center;
+            flex: 0 0 auto;
+        }
+
+        /* Secondary Button (Outline Style) */
         .btn.secondary {
             border: 2px solid var(--primary-color);
             background: transparent;
             color: var(--primary-color);
         }
+        .btn.secondary .icon-svg { fill: var(--primary-color); }
 
         .btn-content { text-align: left; flex: 1; }
         .btn-title { font-size: 1.15rem; }
         .btn-sub { font-size: 0.85rem; opacity: 0.6; margin-top: 2px; font-weight: 500; }
-
-        .btn-icon {
-            width: 40px; height: 40px;
-            display: flex; justify-content: center; align-items: center;
-        }
 
         .btn-small-icon {
             width: 55px;
@@ -326,28 +332,29 @@
         .stat-label { font-size: 0.7rem; opacity: 0.6; text-transform: uppercase; letter-spacing: 1px; margin-top: 5px; }
 
         /* --- SCROLL CONTAINERS --- */
+        /* Universal scroll container for adaptability */
         .menu-scroll {
             width: 100%;
-            flex: 1;
+            flex: 1; /* Take remaining space */
             overflow-y: auto;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 5px 0;
+            padding: 10px 0 40px 0; /* Bottom padding ensures last item isn't cut off */
             scrollbar-width: none;
             mask-image: linear-gradient(to bottom, transparent, black 10px, black 90%, transparent);
             -webkit-mask-image: linear-gradient(to bottom, transparent, black 10px, black 90%, transparent);
-            min-height: 0;
+            min-height: 0; /* Crucial for flexbox scrolling */
         }
         .menu-scroll::-webkit-scrollbar { display: none; }
         
-        /* --- OTHER GAMES GRID (Tailwind Imitation) --- */
+        /* --- OTHER GAMES GRID --- */
         .games-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 16px 16px; /* gap-x-4 gap-y-5 approx */
+            gap: 12px;
             width: 100%;
-            padding: 10px 0;
+            padding: 10px 5px;
         }
         .game-item {
             display: flex;
@@ -356,34 +363,31 @@
             cursor: pointer;
             transition: transform 0.2s;
         }
-        /* Group hover effect */
-        .game-item:hover .game-icon-box {
-            transform: scale(1.05);
-        }
+        .game-item:active { transform: scale(0.95); }
         .game-icon-box {
-            width: 80px; /* w-20 */
-            height: 80px; /* h-20 */
-            background-color: #e5e7eb; /* bg-gray-200 */
-            border-radius: 1.5rem; /* rounded-3xl */
-            margin-bottom: 0.5rem; /* mb-2 */
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            width: 70px;
+            height: 70px;
+            background: var(--floor-color);
+            border-radius: 18px;
+            margin-bottom: 6px;
             overflow: hidden;
-            transition: transform 0.2s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-        body.dark-mode .game-icon-box { background-color: #374151; /* dark:bg-gray-700 */ }
-        
-        .game-icon-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+        .game-icon-img { width: 100%; height: 100%; object-fit: cover; }
         .game-title {
-            font-size: 0.75rem; /* text-xs */
-            font-weight: 500; /* font-medium */
+            font-size: 0.75rem; 
+            font-weight: 600;
             text-align: center;
+            line-height: 1.1;
             color: var(--text-color);
+            /* Handle long names */
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
         /* --- RULES ANIMATION --- */
@@ -455,13 +459,13 @@
         <div style="flex:1"></div>
         <h1>Глайдикс</h1>
         
-        <div style="width: 100%; max-width: 340px; display: flex; flex-direction: column; gap: 20px;">
-            <button class="btn btn-main highlight" onclick="Game.showLevelSelection()">
-                ИГРАТЬ
+        <div style="width: 100%; max-width: 340px; display: flex; flex-direction: column; gap: 15px;">
+            <button class="btn btn-action highlight" onclick="Game.showLevelSelection()">
+                <div class="btn-content">Играть</div>
             </button>
 
-            <button class="btn btn-main secondary" onclick="Game.showOtherGames()">
-                ДРУГИЕ ИГРЫ
+            <button class="btn btn-action secondary" onclick="Game.showOtherGames()">
+                <div class="btn-content">Другие игры</div>
             </button>
         </div>
         
@@ -479,7 +483,7 @@
     <!-- LEVEL SELECTION SCREEN -->
     <div id="screen-levels" class="screen">
         <h2 style="margin-bottom: 10px;">Уровни</h2>
-        <div class="menu-scroll" style="padding-bottom: 20px;">
+        <div class="menu-scroll">
             <button class="btn" id="btn-mode-0" onclick="Game.startMode(0)">
                 <div class="btn-content">
                     <div class="btn-title">Новичок (5x5)</div>
@@ -520,17 +524,19 @@
                 <div class="btn-icon"></div>
             </button>
         </div>
-        <button class="btn btn-main highlight" onclick="Game.showMenu()" style="width: 90%; margin-top: 10px; height: 60px;">Назад</button>
+        <button class="btn btn-action highlight" onclick="Game.showMenu()" style="width: 100%; margin-top: 10px; height: 60px;">Назад</button>
     </div>
 
     <!-- OTHER GAMES SCREEN -->
     <div id="screen-other-games" class="screen">
-        <div class="modal-card" style="width: 100%; max-width: 400px; padding: 25px;">
+        <div class="modal-card" style="width: 100%; max-width: 400px; padding: 25px; display: flex; flex-direction: column; height: 80%;">
             <h2 class="text-3xl font-bold mb-6">Другие игры</h2>
-            <div class="menu-scroll" style="height: 350px;">
+            <div class="menu-scroll">
                 <div class="games-grid" id="other-games-container"></div>
             </div>
-            <button class="btn btn-main secondary" onclick="Game.showMenu()" style="width: 100%; margin-top: 20px; height: 60px;">Назад</button>
+            <button class="btn btn-action secondary" onclick="Game.showMenu()" style="width: 100%; margin-top: 10px; height: 60px;">
+                <div class="btn-content">Назад</div>
+            </button>
         </div>
     </div>
 
@@ -560,7 +566,9 @@
                 </div>
             </div>
 
-            <button class="btn btn-main highlight" onclick="Game.showMenu()" style="width: 100%; margin-top: 20px; height: 60px;">Готово</button>
+            <button class="btn btn-action highlight" onclick="Game.showMenu()" style="width: 100%; margin-top: 20px; height: 60px;">
+                <div class="btn-content">Готово</div>
+            </button>
         </div>
     </div>
 
@@ -587,7 +595,9 @@
                 2. Остановка только у стен.<br>
                 3. Цель: зеленая зона.<br>
             </p>
-            <button class="btn btn-main highlight" onclick="Game.showMenu()" style="width: 100%; margin: 0; height: 60px;">Понятно</button>
+            <button class="btn btn-action highlight" onclick="Game.showMenu()" style="width: 100%; margin: 0; height: 60px;">
+                <div class="btn-content">Понятно</div>
+            </button>
         </div>
     </div>
 
@@ -595,8 +605,12 @@
     <div id="screen-pause" class="screen">
         <div class="modal-card">
             <h2>Пауза</h2>
-            <button class="btn btn-main highlight" onclick="Game.resumeGame()" style="width: 100%; margin: 10px 0; height: 60px;">Продолжить</button>
-            <button class="btn btn-main secondary" onclick="Game.quitToMenu()" style="width: 100%; margin: 10px 0; height: 60px;">В меню</button>
+            <button class="btn btn-action highlight" onclick="Game.resumeGame()" style="width: 100%; margin: 10px 0; height: 60px;">
+                <div class="btn-content">Продолжить</div>
+            </button>
+            <button class="btn btn-action secondary" onclick="Game.quitToMenu()" style="width: 100%; margin: 10px 0; height: 60px;">
+                <div class="btn-content">В меню</div>
+            </button>
         </div>
     </div>
 
@@ -615,8 +629,12 @@
                     <div class="stat-label">Побед</div>
                 </div>
             </div>
-            <button class="btn btn-main highlight" onclick="Game.finishLevelAndNext()" style="width: 100%; margin: 10px 0; height: 60px;">Дальше</button>
-            <button class="btn btn-main secondary" onclick="Game.quitToMenu()" style="width: 100%; margin: 10px 0; height: 60px;">В меню</button>
+            <button class="btn btn-action highlight" onclick="Game.finishLevelAndNext()" style="width: 100%; margin: 10px 0; height: 60px;">
+                <div class="btn-content">Дальше</div>
+            </button>
+            <button class="btn btn-action secondary" onclick="Game.quitToMenu()" style="width: 100%; margin: 10px 0; height: 60px;">
+                <div class="btn-content">В меню</div>
+            </button>
         </div>
     </div>
 
@@ -626,8 +644,12 @@
             <span style="font-size: 3rem;">🔓</span>
             <h2>Новый уровень!</h2>
             <p>Ты настоящий мастер. Следующая сложность открыта.</p>
-            <button class="btn btn-main highlight" onclick="Game.switchToNextMode()" style="width: 100%; margin: 10px 0; height: 60px;">Перейти</button>
-            <button class="btn btn-main secondary" onclick="Game.stayOnCurrentMode()" style="width: 100%; margin: 10px 0; height: 60px;">Остаться</button>
+            <button class="btn btn-action highlight" onclick="Game.switchToNextMode()" style="width: 100%; margin: 10px 0; height: 60px;">
+                <div class="btn-content">Перейти</div>
+            </button>
+            <button class="btn btn-action secondary" onclick="Game.stayOnCurrentMode()" style="width: 100%; margin: 10px 0; height: 60px;">
+                <div class="btn-content">Остаться</div>
+            </button>
         </div>
     </div>
 

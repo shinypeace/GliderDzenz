@@ -164,7 +164,7 @@
         .btn {
             background: var(--bg-color);
             border: none;
-            padding: 12px 20px; /* Reduced padding for better fit */
+            padding: 12px 20px;
             font-size: 1.1rem;
             font-weight: 700;
             color: var(--btn-text);
@@ -199,59 +199,46 @@
             filter: grayscale(1);
         }
         
-        /* New Main Menu Buttons Styling */
-        .btn-main-play {
+        /* --- NEW UNIFIED BUTTON STYLES (Menu/Pause/Win) --- */
+        .btn-primary-large {
+            width: 100%;
+            max-width: 320px;
             background: var(--play-btn-bg);
             color: var(--play-btn-text);
             border: none;
-            height: 80px;
-            font-size: 1.5rem;
+            height: 75px;
+            font-size: 1.4rem;
+            font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 2px;
             box-shadow: 0 10px 20px -5px var(--play-btn-shadow);
-            margin-bottom: 20px;
-            justify-content: center;
+            margin-bottom: 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: transform 0.1s, box-shadow 0.1s;
         }
-        .btn-main-play:active {
+        .btn-primary-large:active {
             transform: scale(0.98);
             box-shadow: 0 5px 10px -5px var(--play-btn-shadow);
         }
         
-        .btn-main-other {
+        .btn-secondary-large {
+            width: 100%;
+            max-width: 320px;
             background: var(--other-btn-bg);
             color: var(--other-btn-text);
             border: 2px solid var(--other-btn-border);
             height: 60px;
             font-size: 1.1rem;
+            font-weight: 700;
             box-shadow: none;
-            justify-content: center;
+            border-radius: 18px;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
         }
-        
-        /* Main Action Buttons (Pause/Win) */
-        .btn-action {
-            width: 100%;
-            max-width: 320px;
-            height: 65px; /* Slightly reduced height */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.2rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin: 8px 0;
+        .btn-secondary-large:active {
+            background: var(--floor-color);
         }
-        .btn-action .btn-content {
-            text-align: center;
-            flex: 0 0 auto;
-        }
-
-        /* Secondary Button (Outline Style) */
-        .btn.secondary {
-            border: 2px solid var(--primary-color);
-            background: transparent;
-            color: var(--primary-color);
-        }
-        .btn.secondary .icon-svg { fill: var(--primary-color); }
 
         .btn-content { text-align: left; flex: 1; }
         .btn-title { font-size: 1.1rem; }
@@ -397,8 +384,8 @@
         /* --- OTHER GAMES GRID --- */
         .games-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
+            grid-template-columns: repeat(4, 1fr); /* Changed to 4 columns */
+            gap: 8px;
             width: 100%;
             padding: 10px 2px;
         }
@@ -411,20 +398,20 @@
         }
         .game-item:active { transform: scale(0.95); }
         .game-icon-box {
-            width: 100%; /* Responsive width */
-            aspect-ratio: 1; /* Keep square */
+            width: 100%; 
+            aspect-ratio: 1; 
             background: var(--floor-color);
-            border-radius: 18px;
-            margin-bottom: 6px;
+            border-radius: 14px; /* Slightly smaller radius */
+            margin-bottom: 4px;
             overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             display: flex;
             justify-content: center;
             align-items: center;
         }
         .game-icon-img { width: 100%; height: 100%; object-fit: cover; }
         .game-title {
-            font-size: 0.7rem; 
+            font-size: 0.65rem; /* Smaller font */
             font-weight: 600;
             text-align: center;
             line-height: 1.1;
@@ -506,12 +493,12 @@
         <div style="flex:1"></div>
         <h1>Глайдикс</h1>
         
-        <div style="width: 100%; max-width: 340px; display: flex; flex-direction: column; gap: 10px;">
-            <button class="btn btn-main-play" onclick="Game.showLevelSelection()">
+        <div style="width: 100%; max-width: 340px; display: flex; flex-direction: column; gap: 8px;">
+            <button class="btn-primary-large" onclick="Game.showLevelSelection()">
                 Играть
             </button>
 
-            <button class="btn btn-main-other" onclick="Game.showOtherGames()">
+            <button class="btn-secondary-large" onclick="Game.showOtherGames()">
                 Другие игры
             </button>
         </div>
@@ -571,7 +558,7 @@
                 <div class="btn-icon"></div>
             </button>
         </div>
-        <button class="btn btn-action highlight" onclick="Game.showMenu()" style="width: 100%; margin-top: 10px; height: 60px;">Назад</button>
+        <button class="btn-primary-large" onclick="Game.showMenu()" style="width: 100%; margin-top: 10px; height: 60px;">Назад</button>
     </div>
 
     <!-- OTHER GAMES SCREEN -->
@@ -581,8 +568,8 @@
             <div class="menu-scroll">
                 <div class="games-grid" id="other-games-container"></div>
             </div>
-            <button class="btn btn-action secondary" onclick="Game.showMenu()" style="width: 100%; margin-top: 10px; height: 60px;">
-                <div class="btn-content">Назад</div>
+            <button class="btn-secondary-large" onclick="Game.showMenu()" style="width: 100%; margin-top: 10px; height: 60px;">
+                Назад
             </button>
         </div>
     </div>
@@ -613,8 +600,8 @@
                 </div>
             </div>
 
-            <button class="btn btn-action highlight" onclick="Game.showMenu()" style="width: 100%; margin-top: 20px; height: 60px;">
-                <div class="btn-content">Готово</div>
+            <button class="btn-primary-large" onclick="Game.showMenu()" style="width: 100%; margin-top: 20px; height: 60px;">
+                Готово
             </button>
         </div>
     </div>
@@ -642,8 +629,8 @@
                 2. Остановка только у стен.<br>
                 3. Цель: зеленая зона.<br>
             </p>
-            <button class="btn btn-action highlight" onclick="Game.showMenu()" style="width: 100%; margin: 0; height: 60px;">
-                <div class="btn-content">Понятно</div>
+            <button class="btn-primary-large" onclick="Game.showMenu()" style="width: 100%; margin: 0; height: 60px;">
+                Понятно
             </button>
         </div>
     </div>
@@ -652,11 +639,11 @@
     <div id="screen-pause" class="screen">
         <div class="modal-card">
             <h2>Пауза</h2>
-            <button class="btn btn-action highlight" onclick="Game.resumeGame()" style="width: 100%; margin: 10px 0; height: 60px;">
-                <div class="btn-content">Продолжить</div>
+            <button class="btn-primary-large" onclick="Game.resumeGame()">
+                Продолжить
             </button>
-            <button class="btn btn-action secondary" onclick="Game.quitToMenu()" style="width: 100%; margin: 10px 0; height: 60px;">
-                <div class="btn-content">В меню</div>
+            <button class="btn-secondary-large" onclick="Game.quitToMenu()">
+                В меню
             </button>
         </div>
     </div>
@@ -676,11 +663,11 @@
                     <div class="stat-label">Побед</div>
                 </div>
             </div>
-            <button class="btn btn-action highlight" onclick="Game.finishLevelAndNext()" style="width: 100%; margin: 10px 0; height: 60px;">
-                <div class="btn-content">Дальше</div>
+            <button class="btn-primary-large" onclick="Game.finishLevelAndNext()">
+                Дальше
             </button>
-            <button class="btn btn-action secondary" onclick="Game.quitToMenu()" style="width: 100%; margin: 10px 0; height: 60px;">
-                <div class="btn-content">В меню</div>
+            <button class="btn-secondary-large" onclick="Game.quitToMenu()">
+                В меню
             </button>
         </div>
     </div>
@@ -691,11 +678,11 @@
             <span style="font-size: 3rem;">🔓</span>
             <h2>Новый уровень!</h2>
             <p>Ты настоящий мастер. Следующая сложность открыта.</p>
-            <button class="btn btn-action highlight" onclick="Game.switchToNextMode()" style="width: 100%; margin: 10px 0; height: 60px;">
-                <div class="btn-content">Перейти</div>
+            <button class="btn-primary-large" onclick="Game.switchToNextMode()">
+                Перейти
             </button>
-            <button class="btn btn-action secondary" onclick="Game.stayOnCurrentMode()" style="width: 100%; margin: 10px 0; height: 60px;">
-                <div class="btn-content">Остаться</div>
+            <button class="btn-secondary-large" onclick="Game.stayOnCurrentMode()">
+                Остаться
             </button>
         </div>
     </div>
@@ -742,7 +729,10 @@ class AudioManager {
         setTimeout(() => this.playTone(500, 'sine', 0.3), 100);
         setTimeout(() => this.playTone(800, 'sine', 0.6), 250);
     }
-    playClick() { this.playTone(800, 'triangle', 0.05); }
+    playClick() { 
+        // Pleasant pop sound (Sine wave with quick decay)
+        this.playTone(600, 'sine', 0.08); 
+    }
     playUnlock() {
         if (!this.enabled) return;
         this.playTone(300, 'sine', 0.2);
@@ -1169,8 +1159,9 @@ class ZenGlider {
         const maxH = this.virtualHeight - 110; 
         this.cellSize = Math.min(maxW / data.width, maxH / data.height);
         
+        // Strict Vertical Centering
         this.offsetX = (this.virtualWidth - (data.width * this.cellSize)) / 2;
-        this.offsetY = (this.virtualHeight - (data.height * this.cellSize)) / 2 + 25;
+        this.offsetY = (this.virtualHeight - (data.height * this.cellSize)) / 2;
     }
 
     finishLevelAndNext() {
